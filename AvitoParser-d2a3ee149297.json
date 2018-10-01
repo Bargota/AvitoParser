@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "avitoparser-218008",
+  "private_key_id": "d2a3ee149297d31ae722864a6c784452869104e2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDEOEZLeLtGuD0A\nrR8Nko7d+59c2oZ9HAG11hA+CdOHBwONQwrFnqgxU4l8ppMrBRJ/abfTGETNs/Al\nigIbYA0sVE1p6xvIA7HuKeBgqdeywvOZOLwuuBuY6IgsoRpI+g+4c9YE3O5INdYI\ntxO1hzG6/G6gKADUimnJ4+bTJuQVrDeASLMo0YDBvYUQDZY/X9lOxMBp3cbXmhFr\nqm/jotlW4LDCH+q87X1gnTthqbaSkpXs/j7N+L9VZP+7AMpPViqnWoMsNHeFECmQ\nZ2zWmsAlVQOqwqDRa6QuAf5BsFAPyzk95XPh1meAa+AjEJEGwJIscqiiE/rOiywX\n2UcMPKwVAgMBAAECggEADrYPYyIqnEs825ufK+PUjUULtij2E1QxtqHVdulCsClw\n9TrVCGr0Pjp+oNdWSk/niqDw9MUph2iZtR7LOKUzZ6LsaOgFHbJVOT9vgJ/LOa5P\nGCo+RZxtCUJJz1rGvzjsS853ecbcoJJUuTOMqTv5GQVK//vvz/+OneHV0Pfl+s/c\nXuOGXmF4ZDfPxnf/KA8FWYS8o6OqdaBp+DrDYWT/ARDsP3dw1U9eSciEO+WyN68h\naK2sUNa/ZeO6rGiWGSy3Op9mIxbSlE4gGeZW1lBD3p3syBOr9DF+okiXP51A+xGj\nbDBCwyIbhzbRLWgAX6xDGKka1ppRUqZHO7tck0JJswKBgQD0py7mQACr6MHB9BNY\naheC2DxxxScBz3/toipDa2cUy519neFhnNT+Oj08sLRyhRh/NrQcKTOwUnLvoSuo\nxPF4VS5xZHrHUuBOmhApraOiQrhF+3Plpqyk1l+NUBYZJJZhimLcaPtbBtI3sf6b\nYJK8vtWvxA3q2n587+U+05k08wKBgQDNUgiRSMt6E8TtAp2z+FZo7k8XeXrfvpFR\nDkMoRGzTkm4kFw2EybN+OvBrP7grx5dCuLvsy9esKwfqh1YHh0bmTO3mJVqEMJZR\nSHtUhyIXP5kMC44wYEHBORdoNMLL6W3DhV1k1ckDZIHacoUJcEXqozBd7t7OzWKU\nUsaOxEb81wKBgEqgoK69gTbvJgNax3flzMwt16pAoFhuCjDbkZbFMUlnnt/NhA15\ngIMYEsvrfu+b59AOSLx6WPkE/WhZOm8dvCafnS4bn1Qj1KZFWn7MJ6j8Pyehv0Wj\nJPCXL8h0UHlU7sZMJ0HiiCHJH+C7W9XbjIckkxwtaq1j/sdvifczJn2/AoGAO1Pd\n5+Up7o9x0q5z1UIH7fAWaIkQqUBOiyZc33DOJWBldQY4QMtrkykCuWrDE9traLsq\niiTon/YbJniOskQzh25pO5xFiHblqH0SLf2SKzeUSLe6EV5vAZ82lUTRmMxNjDao\nIu/nUpSjNPTsXirT+RXIbwwL06PjPUqh1zT98icCgYBsaOVg4HweX/p82T5uWmEY\nKJ2c9FxKBXM7lwdIIBUHKVhq9fzP3hnq65/cOAI6uPucQE+tQJIkfSwq2HCUEc2l\ntNjClZEMuu3S7Z3RaoQrfxhwZ75tj5UJ25+29KcpgdKVYULBzVCm74EcnLx0A7lM\nSHzTD9yarGftR6Y6bBzNVA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "for-avito-parser@avitoparser-218008.iam.gserviceaccount.com",
+  "client_id": "116660299896719389844",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/for-avito-parser%40avitoparser-218008.iam.gserviceaccount.com"
+}

@@ -1,0 +1,138 @@
+Маршальская,25,1955,http://dom.mingkh.ru/tatarstan/kazan/526
+Рихарда Зорге,12А,1967,http://dom.mingkh.ru/tatarstan/kazan/3689
+Рихарда Зорге,12А,1967,http://dom.mingkh.ru/tatarstan/kazan/3689
+Рихарда Зорге,12,1967,http://dom.mingkh.ru/tatarstan/kazan/3689
+Тэцевская,4,,
+Новаторов,11,1965,http://dom.mingkh.ru/tatarstan/kazan/11073
+Тэцевская,4,,
+Четаева,4,2004,http://dom.mingkh.ru/tatarstan/kazan/1221
+33 военный городок,12,2006,http://dom.mingkh.ru/tatarstan/kazan/42878
+Тэцевская,4,,
+Рихарда Зорге,24,1984,http://dom.mingkh.ru/tatarstan/kazan/142
+Даурская,20,1978,http://dom.mingkh.ru/tatarstan/kazan/732776
+Дачная,3,1983,http://dom.mingkh.ru/tatarstan/kazan/359
+Дачная,3,1983,http://dom.mingkh.ru/tatarstan/kazan/359
+Дачная,3,1983,http://dom.mingkh.ru/tatarstan/kazan/359
+Дачная,1,1983,http://dom.mingkh.ru/tatarstan/kazan/359
+Тэцевская,4,,
+Магаданская,18,1989,http://dom.mingkh.ru/tatarstan/kazan/492
+Зур Урам,2,1982,http://dom.mingkh.ru/tatarstan/kazan/3352
+Хлебозаводская,8,1993,http://dom.mingkh.ru/tatarstan/kazan/3170
+Актайская,7а,1968,http://dom.mingkh.ru/tatarstan/kazan/610864
+50-летия Победы,1,,
+Авангардная,163,,
+Ютазинская,14,1977,http://dom.mingkh.ru/tatarstan/kazan/3226
+Яшь кыч,1,1961,http://dom.mingkh.ru/tatarstan/kazan/746544
+Моторная,49Б,1957,http://dom.mingkh.ru/tatarstan/kazan/557
+Маршальская,25,1955,http://dom.mingkh.ru/tatarstan/kazan/526
+Рихарда Зорге,12А,1967,http://dom.mingkh.ru/tatarstan/kazan/3689
+Рихарда Зорге,12А,1967,http://dom.mingkh.ru/tatarstan/kazan/3689
+Рихарда Зорге,12,1967,http://dom.mingkh.ru/tatarstan/kazan/3689
+Тэцевская,4,,http://dom.mingkh.ru/tatarstan/kazan/
+Новаторов,11,1965,http://dom.mingkh.ru/tatarstan/kazan/11073
+Тэцевская,4,,http://dom.mingkh.ru/tatarstan/kazan/
+Четаева,4,2004,http://dom.mingkh.ru/tatarstan/kazan/1221
+33 военный городок,12,2006,http://dom.mingkh.ru/tatarstan/kazan/42878
+Тэцевская,4,,http://dom.mingkh.ru/tatarstan/kazan/
+Рихарда Зорге,24,1984,http://dom.mingkh.ru/tatarstan/kazan/142
+Даурская,20,1978,http://dom.mingkh.ru/tatarstan/kazan/732776
+Дачная,3,1983,http://dom.mingkh.ru/tatarstan/kazan/359
+Дачная,3,1983,http://dom.mingkh.ru/tatarstan/kazan/359
+Дачная,3,1983,http://dom.mingkh.ru/tatarstan/kazan/359
+Дачная,1,1983,http://dom.mingkh.ru/tatarstan/kazan/359
+Тэцевская,4,,http://dom.mingkh.ru/tatarstan/kazan/
+Магаданская,18,1989,http://dom.mingkh.ru/tatarstan/kazan/492
+Зур Урам,2,1982,http://dom.mingkh.ru/tatarstan/kazan/3352
+Хлебозаводская,8,1993,http://dom.mingkh.ru/tatarstan/kazan/3170
+Актайская,7а,1968,http://dom.mingkh.ru/tatarstan/kazan/610864
+50-летия Победы,1,,
+Авангардная,163,,http://dom.mingkh.ru/tatarstan/kazan/
+Ютазинская,14,1977,http://dom.mingkh.ru/tatarstan/kazan/3226
+Яшь кыч,1,1961,http://dom.mingkh.ru/tatarstan/kazan/746544
+Моторная,49Б,1957,http://dom.mingkh.ru/tatarstan/kazan/557
+Космонавтов,13,,
+Зур Урам,1,,
+Индустриальная,7,,
+Хибинская,14,,
+Белинского,41,,
+Ютазинская,14,,
+Зур Урам,1,,
+Адмиралтейская,5,,
+Выборгская,2,,
+Виктора Сажинова,7/11,,
+Индустриальная,7,,
+Поперечно-Базарная ,57,,
+Адмиралтейская,5,,
+Оренбургский тракт,2.6,,
+Владимира Кагина,8А,,
+Мавлютова,3,,
+Братьев Баталловых,5\2,,
+Отрадная,1,,
+33 военный городок,12,,
+Родины,1,,
+Родины,1,,
+Краснококшайская,84,,
+Краснококшайская,84,,
+Родины,1,,
+Родины,1,,
+Родины,1,,
+Аделя Кутуя,108\1,,
+Родины,1,,
+Дачная,1,,
+Родины,24А,,
+Тэцевская,4,,
+Родины,1,,
+Серова,2,,
+Серова,2,,
+Мамадышский тракт,11,,
+Магаданская,18,,
+Серова,2,,
+Даурская,20,,
+Фикрята Табеева,5,,
+Мавлютова,3,,
+Мавлютова,3,1997,http://dom.mingkh.ru/tatarstan/kazan/608250
+Братьев Баталловых,5\2,,http://dom.mingkh.ru/tatarstan/kazan/
+Отрадная,1,1959,http://dom.mingkh.ru/tatarstan/kazan/3676
+33 военный городок,12,2006,http://dom.mingkh.ru/tatarstan/kazan/42878
+Родины,1,,http://dom.mingkh.ru/tatarstan/kazan/
+Родины,1,,http://dom.mingkh.ru/tatarstan/kazan/
+Краснококшайская,84,1985,http://dom.mingkh.ru/tatarstan/kazan/769
+Краснококшайская,84,1985,http://dom.mingkh.ru/tatarstan/kazan/769
+Родины,1,,http://dom.mingkh.ru/tatarstan/kazan/
+Родины,1,,http://dom.mingkh.ru/tatarstan/kazan/
+Родины,1,,http://dom.mingkh.ru/tatarstan/kazan/
+Аделя Кутуя,108\1,1961,http://dom.mingkh.ru/tatarstan/kazan/10968
+Родины,1,,http://dom.mingkh.ru/tatarstan/kazan/
+Дачная,1,1983,http://dom.mingkh.ru/tatarstan/kazan/359
+Родины,24А,,http://dom.mingkh.ru/tatarstan/kazan/
+Тэцевская,4,,http://dom.mingkh.ru/tatarstan/kazan/
+Родины,1,,http://dom.mingkh.ru/tatarstan/kazan/
+Серова,2,1998,http://dom.mingkh.ru/tatarstan/kazan/93335
+Серова,2,1998,http://dom.mingkh.ru/tatarstan/kazan/93335
+Мамадышский тракт,11,,http://dom.mingkh.ru/tatarstan/kazan/
+Магаданская,18,1989,http://dom.mingkh.ru/tatarstan/kazan/492
+Серова,2,1998,http://dom.mingkh.ru/tatarstan/kazan/93335
+Даурская,20,1976,http://dom.mingkh.ru/tatarstan/kazan/742151
+Фикрята Табеева,5,,
+Шаляпина,25,,http://dom.mingkh.ru/tatarstan/kazan/
+Коммунаров,2,1995,http://dom.mingkh.ru/tatarstan/kazan/9192
+Отрадная,1,1959,http://dom.mingkh.ru/tatarstan/kazan/3676
+Фатыха Амирхана,77,1977,http://dom.mingkh.ru/tatarstan/kazan/42434
+Профсоюзная,23В,1960,http://dom.mingkh.ru/tatarstan/kazan/9490
+Шаляпина,25/119,2010,http://dom.mingkh.ru/tatarstan/kazan/746554
+Шаляпина,25/119,2010,http://dom.mingkh.ru/tatarstan/kazan/746554
+Чистопольская,4,2010,http://dom.mingkh.ru/tatarstan/kazan/94023
+Чистопольская,4,2010,http://dom.mingkh.ru/tatarstan/kazan/94023
+Переулок Кирова,5,1962,http://dom.mingkh.ru/tatarstan/kazan/465
+Достоевского,57,2006,http://dom.mingkh.ru/tatarstan/kazan/43973
+Достоевского,57,2006,http://dom.mingkh.ru/tatarstan/kazan/43973
+Чистопольская,6,2006,http://dom.mingkh.ru/tatarstan/kazan/43973
+Кул Гали,10,2014,http://dom.mingkh.ru/tatarstan/kazan/369868
+Мичурина,14,,
+Оренбургский тракт,3,2013,http://dom.mingkh.ru/tatarstan/kazan/698887
+Мавлютова,1,1971,http://dom.mingkh.ru/tatarstan/kazan/43635
+Гавриила Державина,1,Не заполнено,http://dom.mingkh.ru/tatarstan/kazan/803310
+Гагарина,77,1957,http://dom.mingkh.ru/tatarstan/kazan/913
+Авангардная,171,1991,http://dom.mingkh.ru/tatarstan/kazan/608035
+Сыртлановой,1,1988,http://dom.mingkh.ru/tatarstan/kazan/742251
+Рауиса Гареева,2,2015,http://dom.mingkh.ru/tatarstan/kazan/786575
