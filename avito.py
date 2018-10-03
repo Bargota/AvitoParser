@@ -29,7 +29,7 @@ def FlatArea(str_title):
 
 def Price1m2(flat_price,area):
     price_m2=flat_price/area
-    return round(price_m2,2)
+    return round(price_m2)
 
 def import_csv(data):
     with open ('avito_domofond.csv','a') as f:
@@ -153,7 +153,7 @@ def main():
 
     print('end avito')
 
-#main()
+main()
 
 
        
