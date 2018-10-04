@@ -52,7 +52,6 @@ def import_Google_Sheet_all_data(list):
 	all_data=[]
 	for i in list:
 		i['title'] =  i['title'].replace('м²','м2')
-		i['price_m2'] =  i['price_m2'].replace('м²','м2')
 		i['address'] =  i['address'].replace('−','-')
 
 		row_list=[
@@ -69,7 +68,7 @@ def import_Google_Sheet_all_data(list):
 		all_data.append(row_list)
 	gs = GoogleSheets.myGoogleSheet()
 	#gs.AppendRow('Лист1!A1',all_data)
-	gs.AddData('Лист1!A1',all_data)
+	gs.AddData('Лист1!A1000',all_data)
 
 def Floors(str):
     floor = re.findall(r'/(\d{1,2}) эт.',str)

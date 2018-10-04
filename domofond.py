@@ -133,8 +133,8 @@ list=[]
 
 #for i in range(1,total_pages):
 count=1
-#for i in range(1,total_pages+1):
-for i in range(7,8):
+for i in range(1,total_pages+1):
+#for i in range(7,8):
     
     #url_gen = base_url+str(i) #однокомнатные и двухкомнатные
     html = GetHTMLText(url_base+str(i)+url_second_part)
@@ -188,7 +188,7 @@ import_Google_Sheet_all_data(list)
 #	import_Google_Sheet(i)
 print('end domofond')
 
-#avito.main()
+avito.main()
 
                  
         
