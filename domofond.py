@@ -6,6 +6,9 @@ import avito
 import GoogleSheets
 
 
+TEST=0
+
+
 def GetHTMLText(url):
     r=requests.get(url)
     return r.text
@@ -49,7 +52,7 @@ def import_csv(data):
 
 def import_Google_Sheet(data):
 	data['title'] =  data['title'].replace('м²','м2')
-	data['price_m2'] =  data['price_m2'].replace('м²','м2')
+	#data['price_m2'] =  data['price_m2'].replace('м²','м2')
 	data['address'] =  data['address'].replace('−','-')
 
 	gs = GoogleSheets.myGoogleSheet()
@@ -71,9 +74,8 @@ def import_Google_Sheet_all_data(list):
 	all_data=[]
 	for i in list:
 		i['title'] =  i['title'].replace('м²','м2')
-		i['price_m2'] =  i['price_m2'].replace('м²','м2')
+		#i['price_m2'] =  i['price_m2'].replace('м²','м2')
 		i['address'] =  i['address'].replace('−','-')
-
 		row_list=[
 				   i['title'],
                    i['price'],
@@ -113,6 +115,45 @@ def GetTotalPages(html):
     #total_pages = tmp_pages.split('=')[1].split('&')[0]
     return int(tmp_pages)
 
+def ConectLists(list1,list2):
+	if len(list1)>len(list2):
+		for i in list2:
+			list1.append(i)
+		return list1
+	else:
+		for i in list1:
+			list2.append(i)
+		return list2
+
+def SortListByAddress(list):
+	bad_list=['голивуд','приволжский']
+	good_list = ['ул', 'пер', 'пр']
+	final_list=[]
+	for i in list:
+		sum_find=0
+		flag_continue=0
+		address_in_lower_case = i['address'].lower()
+		for item_bad_list in bad_list:
+			finder_bad = address_in_lower_case.find(item_bad_list)	
+			if finder_bad>0:
+				#list.remove(i)
+				flag_continue=1
+				continue
+			
+		if flag_continue==1:
+			continue
+
+		for item_good_list in good_list:			
+			finder = address_in_lower_case.find(item_good_list)			
+			if finder>=0:
+				sum_find=sum_find+1
+			if sum_find>0:
+				continue
+		if sum_find==0:
+			continue
+		final_list.append(i)
+	return final_list
+
 
 
 
@@ -133,8 +174,16 @@ list=[]
 
 #for i in range(1,total_pages):
 count=1
-for i in range(1,total_pages+1):
-#for i in range(7,8):
+
+
+if TEST==1:
+	begin_page = 7
+	total_pages=8
+else:
+	begin_page = 1
+
+
+for i in range(begin_page,total_pages+1):
     
     #url_gen = base_url+str(i) #однокомнатные и двухкомнатные
     html = GetHTMLText(url_base+str(i)+url_second_part)
@@ -153,11 +202,12 @@ for i in range(1,total_pages+1):
         except:
             price=""
         try:
-            price_m2 = description.find('a').find('div',class_='e-price-breakdown').text.strip()
-            price_m2 = price_m2.replace(' РУБ. за м²','')
-            price_m2 = price_m2.replace('\xa0','')
+            price_m2_str = description.find('a').find('div',class_='e-price-breakdown').text.strip()
+            price_m2_str = price_m2_str.replace(' РУБ. за м²','')
+            price_m2_str = price_m2_str.replace('\xa0','')
+            price_m2=int(price_m2_str )
         except:
-            price_m2=""
+            price_m2=0
         try:
             title = description.find('a').find('span',class_='e-tile-type').find('strong').text.strip()
         except:
@@ -179,16 +229,21 @@ for i in range(1,total_pages+1):
             }
         if int(price_m2)>65000 and int(price_m2)<85000:
             list.append(data)
-        print (str(count)+' '+title+'    '+price_m2)        
+        print (str(count)+' '+title+'    '+str(price_m2))        
         count=count+1
 
-import_Google_Sheet_all_data(list)
+avito_list=avito.main(TEST)
+united_list = ConectLists(list,avito_list)
+
+sort_list=SortListByAddress(united_list)
+
+import_Google_Sheet_all_data(sort_list)
 #for i in list:
 #    #import_csv(i)
 #	import_Google_Sheet(i)
 print('end domofond')
 
-avito.main()
+
 
                  
         

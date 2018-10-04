@@ -83,7 +83,7 @@ def GoodAddress(str):
     return False
 
 
-def main():
+def main(TEST):
     ##url = 'https://www.avito.ru/kazan/kvartiry/prodam/1-komnatnye?p=1'  #однокомнатные
     ##base_url = 'https://www.avito.ru/kazan/kvartiry/prodam/1-komnatnye?'
 
@@ -98,15 +98,23 @@ def main():
 
     list=[]
     counter=1
-    #for i in range(1,total_pages+1):
-    for i in range(1,20):
+
+    if TEST==1:
+        begin_page=1
+        total_pages=2
+    else:
+        begin_page=1
+
+    for i in range(begin_page,total_pages+1):
+
+    
         #url_gen = base_url+page_url+str(i) #однокомнатные
         url_gen = base_url+page_url+str(i)+'&f=549_5696-5697' #однокомнатные и двухкомнатные
         html = GetHTMLText(url_gen)
         soup = BeautifulSoup(html)
         ads= soup.find('div',class_='catalog-list').find_all('div',class_='item_table')
         #ads= soup.find('div',class_='catalog-list').find_all('div',class_='item')
-    
+        
         for j in ads:
             description = j.find('div',class_='description')
             try:
@@ -170,16 +178,19 @@ def main():
                 #import_csv(data)
                 print('OK')
                 list.append(data)
+
     list=sorted(list, key=lambda x: x['price'])
     print('sort')
 
-    import_Google_Sheet_all_data(list)
+    #import_Google_Sheet_all_data(list)
     #for i in list:
     #    import_csv(i)
-
+	
     print('end avito')
+    return list
 
-#main()
+
+#main(1)
 
 
        
