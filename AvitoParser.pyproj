@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0b726808-e4b9-4777-9fd5-243bf8631d27}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>GoogleSheets.py</StartupFile>
+    <StartupFile>domofond.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>

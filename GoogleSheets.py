@@ -4,20 +4,20 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 
 class myGoogleSheet():
-	self.spreadsheetId = '1QQ72J0T6zZF-CddtOAt9GMdn8Hduc0Wx-IQwr-zUhzI'
-	self.service
+	spreadsheetId = '1QQ72J0T6zZF-CddtOAt9GMdn8Hduc0Wx-IQwr-zUhzI'
+	#service
 
 	def __init__(self):
 		CREDENTIALS_FILE = 'AvitoParser-fa42c491fb6e.json'  # имя файла с закрытым ключом
 		credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE, ['https://www.googleapis.com/auth/spreadsheets',
                                                                                   'https://www.googleapis.com/auth/drive'])
 		httpAuth = credentials.authorize(httplib2.Http())
-		service = apiclient.discovery.build('sheets', 'v4', http = httpAuth)
+		self.service = apiclient.discovery.build('sheets', 'v4', http = httpAuth)
 
 
 	#Создание нового документа
 	def CreateSheet(self,name_doc,name_sheet):
-		spreadsheet = service.spreadsheets().create(body = {
+		spreadsheet = self.service.spreadsheets().create(body = {
 																'properties': {'title': name_doc, 'locale': 'ru_RU'},
 																'sheets': [{'properties': {'sheetType': 'GRID',
 																							'sheetId': 0,
@@ -25,6 +25,50 @@ class myGoogleSheet():
 																							#'gridProperties': {'rowCount': 8, 'columnCount': 5}
 																							}}]
 															}).execute()
+
+	#Добавление строки данных, если A1 ячейка заполненна данные добавятся в первую незаполненную строку
+	def AppendRow(self,range_with_list,row_list):
+		results = self.service.spreadsheets().values().append(
+												spreadsheetId=self.spreadsheetId,
+												range=range_with_list,
+												valueInputOption='USER_ENTERED',
+												insertDataOption='INSERT_ROWS',
+												body = 
+														
+																	{
+																		"range":range_with_list,
+																		"majorDimension": "COLUMNS",
+																		"values": row_list
+																	}
+																
+														
+												).execute()
+
+	#Очистить ячейки
+	def ClearSheet(self):
+		results = self.service.spreadsheets().values().batchClear(
+																spreadsheetId=self.spreadsheetId,
+															    body={
+																		"ranges": ['Лист1!A1:Z10000']
+																	 }
+															).execute()
+
+	#Добавление данных в ячейку
+	def AddData(self,range, data):
+		results = self.service.spreadsheets().values().batchUpdate(
+																spreadsheetId = self.spreadsheetId,
+																body = {
+																		"valueInputOption": "USER_ENTERED",
+																		"data": [
+																					{
+																						"range": range,
+																						"majorDimension": "ROWS",  # сначала заполнять столбцы, затем ряды (т.е. самые внутренние списки в values - это столбцы)
+																						"values": data
+																					}
+																				]
+																		}
+															).execute()
+
 
 
 
@@ -83,31 +127,12 @@ class myGoogleSheet():
 #    ]
 #}).execute()
 
-#Добавление строки данных, если A1 ячейка заполненна данные добавятся в первую незаполненную строку
-results = service.spreadsheets().values().append(
-												spreadsheetId='1QQ72J0T6zZF-CddtOAt9GMdn8Hduc0Wx-IQwr-zUhzI',
-												range='Лист1!A1',
-												valueInputOption='USER_ENTERED',
-												insertDataOption='INSERT_ROWS',
-												body = 
-														
-																	{
-																		"range": "Лист1!A1",
-																		"majorDimension": "COLUMNS",
-																		"values": [["345"],["123"]]
-																	}
-																
-														
-												).execute()
-print(results.get("tableRange"))
+#gs=myGoogleSheet()
+#gs.AddData('Лист1!A1',
+#						[['1','2'],
+#						['3','4']]
+#					  )
 
 
-#Очистить ячейки
-results = service.spreadsheets().values().batchClear(
-														spreadsheetId='1QQ72J0T6zZF-CddtOAt9GMdn8Hduc0Wx-IQwr-zUhzI',
-													    body={
-																"ranges": ['Лист1!A1:Z10000']
-															 }
-													).execute()
 
 

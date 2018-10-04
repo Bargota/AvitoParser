@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re #импорт модуля регулярных выражений
 import csv
 import avito
+import GoogleSheets
 
 
 def GetHTMLText(url):
@@ -46,6 +47,53 @@ def import_csv(data):
                          #data['date_ad']
                          ))
 
+def import_Google_Sheet(data):
+	data['title'] =  data['title'].replace('м²','м2')
+	data['price_m2'] =  data['price_m2'].replace('м²','м2')
+	data['address'] =  data['address'].replace('−','-')
+
+	gs = GoogleSheets.myGoogleSheet()
+	data_main_list=[
+				   [data['title']],
+                   [data['price']],
+                   [data['price_m2']],
+                   #[str(data['area'])],
+                   [data['address']],
+                   [data['urlad']]
+                   #[str(data['floors'])],
+                   #[data['type_house']],
+                   #[data['date_ad']]
+				   ]
+	gs.AppendRow('Лист1!A1',data_main_list)
+
+
+def import_Google_Sheet_all_data(list):
+	all_data=[]
+	for i in list:
+		i['title'] =  i['title'].replace('м²','м2')
+		i['price_m2'] =  i['price_m2'].replace('м²','м2')
+		i['address'] =  i['address'].replace('−','-')
+
+		row_list=[
+				   i['title'],
+                   i['price'],
+                   i['price_m2'],
+                   #str(data['area']),
+                   i['address'],
+                   i['urlad']
+                   #str(data['floors']),
+                   #data['type_house'],
+                   #data['date_ad']
+				   ]
+		all_data.append(row_list)
+	gs = GoogleSheets.myGoogleSheet()
+	#gs.AppendRow('Лист1!A1',all_data)
+	gs.AddData('Лист1!A1',all_data)
+
+
+
+
+
 def Floors(str):
     floor = re.find_all(r'/(\d{1,2}) эт.',str)
     float_floor  = float(floor[0])
@@ -69,6 +117,8 @@ def GetTotalPages(html):
 
 
 
+
+
 #url='https://www.domofond.ru/prodazha-nedvizhimosti/search?MetroIds=289%2C292%2C293%2C290%2C291&PropertyTypeDescription=kvartiry&PriceFrom=2000000&PriceTo=3000000&Rooms=One%2CTwo&Page=1' #однокомнатные и двухкомнатные
 #base_url = 'https://www.domofond.ru/prodazha-nedvizhimosti/search?MetroIds=289%2C292%2C293%2C290%2C291&PropertyTypeDescription=kvartiry&PriceFrom=2000000&PriceTo=3000000&Rooms=One%2CTwo&Page='
 #https://www.domofond.ru/prodazha-nedvizhimosti/search?MetroIds=296%2C289%2C292%2C293%2C290%2C291&PropertyTypeDescription=kvartiry&PriceFrom=2000000&PriceTo=3100000&Rooms=One&FloorSizeFrom=32&Page=1&SortOrder=PricePerSquareMeterLow&DistanceFromMetro=UpTo3000m
@@ -83,7 +133,8 @@ list=[]
 
 #for i in range(1,total_pages):
 count=1
-for i in range(1,total_pages+1):
+#for i in range(1,total_pages+1):
+for i in range(7,8):
     
     #url_gen = base_url+str(i) #однокомнатные и двухкомнатные
     html = GetHTMLText(url_base+str(i)+url_second_part)
@@ -131,11 +182,13 @@ for i in range(1,total_pages+1):
         print (str(count)+' '+title+'    '+price_m2)        
         count=count+1
 
-for i in list:
-    import_csv(i)
+import_Google_Sheet_all_data(list)
+#for i in list:
+#    #import_csv(i)
+#	import_Google_Sheet(i)
 print('end domofond')
 
-avito.main()
+#avito.main()
 
                  
         
