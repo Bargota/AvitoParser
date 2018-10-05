@@ -24,11 +24,17 @@
     <InterpreterReference Include="{1125dc0e-c620-499b-aff9-09e02eba837d}\3.5" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseParser.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="domofond.py" />
     <Compile Include="avito.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GoogleSheets.py" />
+    <Compile Include="main.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="YearOfConstruction.py">
       <SubType>Code</SubType>
     </Compile>

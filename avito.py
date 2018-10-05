@@ -3,6 +3,12 @@ from bs4 import BeautifulSoup
 import re #импорт модуля регулярных выражений
 import csv
 import GoogleSheets
+import BaseParser
+
+
+class AvitoParser(BaseParser.Parser):
+	pass
+
 
 def GetHTMLText(url):
     try:
