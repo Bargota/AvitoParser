@@ -3,12 +3,14 @@ import requests
 
 
 class Parser():
-	def __init__(base_url):
-		self.base_url=base_url
+	def __init__(self,url):
+		self.url=url
+		self.total_page=''
+		self.list = []
 
-	def GetHTMLText(self):
+	def GetHTMLText(self,url):
 		try:
-			r=requests.get(self.base_url)
+			r=requests.get(url)
 		except:
 			return ''
 		return r.text
@@ -21,7 +23,7 @@ class Parser():
 		return int(total_pages)
 
 	def TakeData(self, ads):
-		list=[]
+		self.list=[]
 		for ad in ads:
 			title=FindTitle()
 			address=FindAddress()
@@ -39,8 +41,8 @@ class Parser():
                         'date_ad':date_ad,
                         #'type_house':type_house}
                         }
-			list.append(dict_ad)
-		return list
+			self.list.append(dict_ad)
+		return self.list
 		
 
 	def FindTitle(self):

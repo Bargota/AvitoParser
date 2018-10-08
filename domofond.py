@@ -127,7 +127,8 @@ def ConectLists(list1,list2):
 
 def SortListByAddress(list):
 	bad_list=['минская','авиастроительный']
-	good_list = ['ул','пер','пр',
+	good_list = [
+				 #'ул','пер','пр',
                  'толбухина',
                  'гвардейская',
                  'седова','шуртыгина',
