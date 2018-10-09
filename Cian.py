@@ -30,18 +30,20 @@ class Cian(BaseParser.Parser):
 		for page in range(begin_page,self.total_page):
 			print(page)
 			soup = BeautifulSoup(self.GetHTMLText(self.url +'&p='+str(page)))
-			try:
-				ads = soup.find('div',class_='_93444fe79c-wrapper--1Z8Nz').find_all('div',class_='_93444fe79c-card--2Jgih')
-			except:
-				ads = []
+			#try:
+			#	ads = soup.find('div',class_='_93444fe79c-wrapper--1Z8Nz').find_all('div',class_='_93444fe79c-card--2Jgih')
+			#except:
+			#	ads = []
+			ads=self.FindAdsInPage(soup,'div','_93444fe79c-wrapper--1Z8Nz',
+								   'div','_93444fe79c-card--2Jgih')
 
 			for item in ads:
-				title=self.FindTitle(item)
-				price=self.FindPrice(item)
-				url_ad = self.FindUrl(item)
-				address = self.FindAddress(item)
-				area  = self.FindArea(title)
-				price_m2=self.FindPriceM2(price,area)
+				title=self._FindTitle(item)
+				price=self._FindPrice(item)
+				url_ad = self._FindUrl(item)
+				address = self._FindAddress(item)
+				area  = self._FindArea(title)
+				price_m2=self._FindPriceM2(price,area)
 
 
 				dict_ad = {'title':title,
@@ -56,14 +58,14 @@ class Cian(BaseParser.Parser):
 							}
 				self.list.append(dict_ad)
 
-	def FindTitle(self,soup):
+	def _FindTitle(self,soup):
 		try:
 			title = soup.find('div',class_='c6e8ba5398-info-section--28o47 c6e8ba5398-main-info--Rfnfh').find('div',class_='c6e8ba5398-title--3WDDX').text
 		except:
 			title=''
 		return title
 
-	def FindPrice(self,soup):
+	def _FindPrice(self,soup):
 		try:
 			price_str = soup.find('div',class_='c6e8ba5398-info-section--28o47 c6e8ba5398-main-info--Rfnfh').find('div',class_='c6e8ba5398-header--6WXYW').text
 			price = int(price_str.replace(' ','').replace('₽',''))
@@ -71,26 +73,26 @@ class Cian(BaseParser.Parser):
 			price=0
 		return price
 
-	def FindUrl(self,soup):
+	def _FindUrl(self,soup):
 		try:
 			url = soup.find('div',class_='c6e8ba5398-info-section--28o47 c6e8ba5398-main-info--Rfnfh').find('a').get('href')
 		except:
 			url=''
 		return url
 
-	def FindAddress(self,soup):
+	def _FindAddress(self,soup):
 		try:
 			address = soup.find('div',class_='c6e8ba5398-address-links--1I9u5').find('span').get('content')
 		except:
 			address=''
 		return address
 
-	def FindArea(self,title_str):
+	def _FindArea(self,title_str):
 		area = re.findall(r'(\d{2}.?\d?) м²',title_str)
 		float_area  = float(area[0])
 		return float_area
 
-	def FindPriceM2(self,price,area):
+	def _FindPriceM2(self,price,area):
 		return round(price/area,0)
 
 

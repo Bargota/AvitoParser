@@ -60,3 +60,10 @@ class Parser():
 	def FindArea(self):
 		return area
 		pass
+
+	def FindAdsInPage(self,soup,key,class_,key_all,class_all):
+		try:
+			ads = soup.find(key,class_=class_).find_all(key_all,class_=class_all)
+		except:
+			ads = []
+		return ads
