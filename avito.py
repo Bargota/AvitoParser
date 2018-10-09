@@ -94,7 +94,8 @@ def main(TEST):
     ##base_url = 'https://www.avito.ru/kazan/avtomobili?'
 
     page_url = 'p='
-    total_pages = GetTotalPages(GetHTMLText(url))
+    #total_pages = GetTotalPages(GetHTMLText(url))
+    total_pages = 20
 
     list=[]
     counter=1
