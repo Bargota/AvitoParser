@@ -5,13 +5,13 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0b726808-e4b9-4777-9fd5-243bf8631d27}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>Cian.py</StartupFile>
+    <StartupFile>domofond.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <InterpreterId>{1125dc0e-c620-499b-aff9-09e02eba837d}</InterpreterId>
+    <InterpreterId>{33617631-6198-48e5-a5ad-be5f36ef6cf9}</InterpreterId>
     <InterpreterVersion>3.5</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
@@ -21,7 +21,7 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
-    <InterpreterReference Include="{1125dc0e-c620-499b-aff9-09e02eba837d}\3.5" />
+    <InterpreterReference Include="{33617631-6198-48e5-a5ad-be5f36ef6cf9}\3.5" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseParser.py">
