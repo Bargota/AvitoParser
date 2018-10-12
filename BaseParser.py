@@ -1,11 +1,13 @@
 import requests
+import re
 
 
 
 class Parser():
 	def __init__(self,url):
 		self.url=url
-		self.total_page=''
+		self.total_pages=0
+		self.begin_page=0
 		self.list = []
 
 	def GetHTMLText(self,url):
@@ -15,51 +17,14 @@ class Parser():
 			return ''
 		return r.text
 
-	def GetTotalPages(self,html):
-		soup = BeautifulSoup(html)
-		tmp_pages = soup.find('div', class_='pagination-pages').find_all('a', class_='pagination-page')[-1].get('href')
-		#total_pages = tmp_pages.split('=')[1]
-		total_pages = tmp_pages.split('=')[1].split('&')[0]
-		return int(total_pages)
-
-	def TakeData(self, ads):
-		self.list=[]
-		for ad in ads:
-			title=FindTitle()
-			address=FindAddress()
-			price=FindPrice()
-			area=FindArea()
-			price_m2=round(price/area)
-
-			dict_ad = {'title':title,
-                        'price':price,
-                        'price_m2':price_m2,
-                        'address':address,
-                        'urlad':url_ad,
-                        'area':area,
-                        'floors':floors,
-                        'date_ad':date_ad,
-                        #'type_house':type_house}
-                        }
-			self.list.append(dict_ad)
-		return self.list
-		
-
-	def FindTitle(self):
-		return title
-		
-
-	def FindAddress(self):
-		return address
-		
-
-	def FindPrice(self):
-		return price
-		pass
-
-	def FindArea(self):
-		return area
-		pass
+	def TestOrNot(self,TEST=0):
+		if TEST==1:
+			self.total_pages=2
+			self.begin_page=1
+		else:
+			self.GetTotalPages(self.GetHTMLText(self.url))
+			print('total_page='+str(self.total_pages))
+			self.begin_page=1
 
 	def FindAdsInPage(self,soup,key,class_,key_all,class_all):
 		try:
@@ -67,3 +32,16 @@ class Parser():
 		except:
 			ads = []
 		return ads
+
+	def _FindArea(self,title_str):
+		area = re.findall(r'(\d{2}.?\d?) м²',title_str)
+		float_area  = float(area[0])
+		return float_area
+
+	def _FindPriceM2(self,price,area):
+		return round(price/area,0)
+
+	def _FindFloors(self,title_str):
+			floor = re.findall(r'/(\d{1,2}) эт.',title_str)
+			floors  = int(floor[0])
+			return floors
