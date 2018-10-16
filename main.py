@@ -5,9 +5,17 @@ import Cian
 import WorkLists
 import time
 
-#import test_form
+import qt.main_qt
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtCore import SIGNAL
+from PyQt5.QtGui import QApplication, QMainWindow, QFont
 
-#test_form.main()
+app=QApplication()
+main = qt.main_qt.QMainWindow()
+main.show()
+sys.exit(app._exec_)
+
+
 
 start_time = time.time()
 
