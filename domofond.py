@@ -12,7 +12,7 @@ TEST=0
 
 class DomofondParser(BaseParser.Parser):	
 	def GetTotalPages(self,html):
-		soup = BeautifulSoup(html)
+		soup = BeautifulSoup(html,'lxml')
 		total_pages_str = soup.find('div', class_='b-pager').find('ul',class_='e-pages').find_all('li')[-1].text        
 		self.total_pages = int(total_pages_str)
 		return int(self.total_pages)
@@ -26,7 +26,7 @@ class DomofondParser(BaseParser.Parser):
 		for page in range(self.begin_page,self.total_pages+1):
 			url_gen = base_url+str(page)+url_second_part
 			print(page)
-			soup = BeautifulSoup(self.GetHTMLText(url_gen))
+			soup = BeautifulSoup(self.GetHTMLText(url_gen),'lxml')
 			
 			ads=self.FindAdsInPage(soup,'div','g-padding-bottom-lg',
 								   'div','b-results-tile')
@@ -51,7 +51,7 @@ class DomofondParser(BaseParser.Parser):
 							#'type_house':type_house}
 							}
 				self.list.append(dict_ad)
-			return self.list
+		return self.list
 
 	def _FindTitle(self,soup):
 		try:
@@ -103,7 +103,7 @@ def GetHTMLText(url):
 	return r.text
 
 def GetTotalPages(html):
-	soup = BeautifulSoup(html)
+	soup = BeautifulSoup(html,'lxml')
 	total_pages = soup.find('div', class_='b-pager').find('ul',class_='e-pages').find_all('a')[6].text
 	return int(total_pages)
 
@@ -178,7 +178,7 @@ def GoodAddress(str):
 	return False
 
 def GetTotalPages(html):
-	soup = BeautifulSoup(html)
+	soup = BeautifulSoup(html,'lxml')
 	tmp_pages = soup.find('div', class_='b-pager').find('ul',class_='e-pages').find_all('li')[-1].text
 	#total_pages = tmp_pages.split('=')[1]
 	#total_pages = tmp_pages.split('=')[1].split('&')[0]
@@ -222,7 +222,7 @@ def main():
 	
 		#url_gen = base_url+str(i) #однокомнатные и двухкомнатные
 		html = GetHTMLText(url_base+str(i)+url_second_part)
-		soup = BeautifulSoup(html)
+		soup = BeautifulSoup(html,'lxml')
 		ads= soup.find('div',class_='g-padding-bottom-lg').find_all('div',class_='b-results-tile')
 	
 		for j in ads:

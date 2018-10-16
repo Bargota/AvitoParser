@@ -16,17 +16,19 @@ def ConectLists(list1,list2):
 
 
 def SortListByAddress(list):
-	bad_list=['минская','авиастроительный']
+	bad_list=['минская','авиастроительный','шигалеево',]
 	good_list = [
-				 'толбухина',
-				 'гвардейская',
+				 'толбухина','гвардейская',
 				 'седова','шуртыгина',
 				 'сахарова','стрелков',
 				 'даурская','такташ',
 				 'отрадная','курчатова',
 				 'гастело','товарищеская',
-				 'абсалямова','лумумбы',
-				 'кутуя']
+				 'лумумбы',
+				 'кутуя','победы'
+                 'мавлютова','камала',
+                 'четаева','касимовых'
+                 ]
 	final_list=[]
 	for i in list:
 		sum_find=0
@@ -79,6 +81,7 @@ def SortList(list):
 	list2=SortListByParam(list1,'floors',0,15)
 	list3=SortListByParam(list2,'price',2000000,3100000)
 	list4=SortListByParam(list3,'price_m2',70000,85000)
+	print(str(len(list))+' '+str(len(list1))+' '+str(len(list2))+' '+str(len(list3))+' '+str(len(list4)))
 	return list4
 
 def import_Google_Sheet_all_data(list):

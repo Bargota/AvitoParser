@@ -9,7 +9,7 @@ class Cian(BaseParser.Parser):
 	def GetTotalPages(self,html):    
 		self.total_pages=''
 		while self.total_pages=='' or self.total_pages=='..':
-			soup = BeautifulSoup(html)
+			soup = BeautifulSoup(html,'lxml')
 			tmp = soup.find('div', id='frontend-serp').find('ul',class_='_93444fe79c-list--35Suf').find_all('li', class_='_93444fe79c-list-item--2QgXB')[-1]
 			self.total_pages=tmp.text
 			if self.total_pages=='..':
@@ -28,7 +28,7 @@ class Cian(BaseParser.Parser):
 		
 		for page in range(self.begin_page,self.total_pages+1):
 			print(page)
-			soup = BeautifulSoup(self.GetHTMLText(self.url +'&p='+str(page)))
+			soup = BeautifulSoup(self.GetHTMLText(self.url +'&p='+str(page)),'lxml')
 			#try:
 			#	ads = soup.find('div',class_='_93444fe79c-wrapper--1Z8Nz').find_all('div',class_='_93444fe79c-card--2Jgih')
 			#except:
@@ -56,7 +56,7 @@ class Cian(BaseParser.Parser):
 							#'type_house':type_house}
 							}
 				self.list.append(dict_ad)
-			return self.list
+		return self.list
 
 	def _FindTitle(self,soup):
 		try:

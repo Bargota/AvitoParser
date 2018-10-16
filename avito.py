@@ -9,7 +9,7 @@ import BaseParser
 class AvitoParser(BaseParser.Parser):
 	
 	def GetTotalPages(self,html):
-		soup = BeautifulSoup(html)
+		soup = BeautifulSoup(html,'lxml')
 		tmp_pages = soup.find('div', class_='pagination-pages').find_all('a', class_='pagination-page')[-1].get('href')
 		#total_pages = tmp_pages.split('=')[1]
 		self.total_pages = tmp_pages.split('=')[1].split('&')[0]
@@ -24,9 +24,11 @@ class AvitoParser(BaseParser.Parser):
 		
 		count=1
 		for i in range(self.begin_page,self.total_pages+1):	
-			url_gen = base_url+page_url+str(i)+'&f=549_5696-5697'
+			#url_gen = base_url+page_url+str(i)+'&f=549_5696-5697'
+			url_gen = base_url+page_url+str(i)+'&pmax=3100000&pmin=2000000&f=59_13987b0.497_0b5196'
+			
 			html = GetHTMLText(url_gen)
-			soup = BeautifulSoup(html)
+			soup = BeautifulSoup(html,'lxml')
 
 			ads=self.FindAdsInPage(soup,'div','catalog-list',
 								   'div','item_table')
@@ -118,7 +120,7 @@ def GetHTMLText(url):
 	return r.text
 
 def GetTotalPages(html):
-	soup = BeautifulSoup(html)
+	soup = BeautifulSoup(html,'lxml')
 	tmp_pages = soup.find('div', class_='pagination-pages').find_all('a', class_='pagination-page')[-1].get('href')
 	#total_pages = tmp_pages.split('=')[1]
 	total_pages = tmp_pages.split('=')[1].split('&')[0]
@@ -217,7 +219,7 @@ def main(TEST):
 		#url_gen = base_url+page_url+str(i) #однокомнатные
 		url_gen = base_url+page_url+str(i)+'&f=549_5696-5697' #однокомнатные и двухкомнатные
 		html = GetHTMLText(url_gen)
-		soup = BeautifulSoup(html)
+		soup = BeautifulSoup(html,'lxml')
 		ads= soup.find('div',class_='catalog-list').find_all('div',class_='item_table')
 		#ads= soup.find('div',class_='catalog-list').find_all('div',class_='item')
 		

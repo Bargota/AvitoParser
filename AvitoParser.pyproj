@@ -34,8 +34,12 @@
     <Compile Include="avito.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="form.py" />
     <Compile Include="GoogleSheets.py" />
     <Compile Include="main.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="test_form.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="WorkLists.py">

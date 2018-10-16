@@ -1,0 +1,1 @@
+pyuic5 qwe.ui -o output.py
