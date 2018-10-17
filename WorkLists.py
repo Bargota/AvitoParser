@@ -18,6 +18,7 @@ def ConectLists(list1,list2):
 def SortListByAddress(list):
 	bad_list=['минская','авиастроительный','шигалеево',]
 	good_list = [
+                   'ул',
 				 'толбухина','гвардейская',
 				 'седова','шуртыгина',
 				 'сахарова','стрелков',
@@ -105,7 +106,7 @@ def import_Google_Sheet_all_data(list):
 			all_data.append(row_list)
 		gs = GoogleSheets.myGoogleSheet()
 		#gs.AppendRow('????1!A1',all_data)
-		gs.AddData('Лист1!A1',all_data)
+		gs.AddData('Смотреть тут!A1',all_data)
 	else:
 		print('Итоговый список пуст')
 

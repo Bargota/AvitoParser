@@ -49,7 +49,7 @@ class myGoogleSheet():
 		results = self.service.spreadsheets().values().batchClear(
 																spreadsheetId=self.spreadsheetId,
 															    body={
-																		"ranges": ['Лист1!A1:Z10000']
+																		"ranges": ['Смотреть тут!A1:Z10000']
 																	 }
 															).execute()
 

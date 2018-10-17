@@ -4,16 +4,9 @@ import domofond
 import Cian
 import WorkLists
 import time
+import sys
 
-import qt.main_qt
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtCore import SIGNAL
-from PyQt5.QtGui import QApplication, QMainWindow, QFont
 
-app=QApplication()
-main = qt.main_qt.QMainWindow()
-main.show()
-sys.exit(app._exec_)
 
 
 
@@ -23,7 +16,7 @@ my_d=domofond.DomofondParser('https://www.domofond.ru/prodazha-nedvizhimosti/sea
 list_d = my_d.GetData()
 print("--- %s seconds ---" % (time.time() - start_time))
 
-my_a=avito.AvitoParser('https://www.avito.ru/kazan/kvartiry/prodam?p=1&f=549_5696-5697')
+my_a=avito.AvitoParser('https://www.avito.ru/kazan/kvartiry/prodam?p=1&pmax=3100000&pmin=2000000&f=59_13987b0.497_0b5196')
 list_a=my_a.GetData()
 print("--- %s seconds ---" % (time.time() - start_time))
 
@@ -37,9 +30,9 @@ sort_list_address = WorkLists.SortListByAddress(union_list)
 sort_list=WorkLists.SortList(sort_list_address)
 
 WorkLists.import_Google_Sheet_all_data(sort_list)
-print('domofond adds count'+str(len(list_d)))
-print('avito adds count'+str(len(list_a)))
-print('Cian adds count'+str(len(list_c)))
+print('domofond adds count '+str(len(list_d)))
+print('avito adds count '+str(len(list_a)))
+print('Cian adds count '+str(len(list_c)))
 print("--- %s seconds ---" % (time.time() - start_time))
 
 

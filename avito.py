@@ -21,7 +21,7 @@ class AvitoParser(BaseParser.Parser):
 		page_url = 'p='
 		
 		self.TestOrNot(TEST)
-		
+		print ('avito')
 		count=1
 		for i in range(self.begin_page,self.total_pages+1):	
 			#url_gen = base_url+page_url+str(i)+'&f=549_5696-5697'
@@ -58,8 +58,9 @@ class AvitoParser(BaseParser.Parser):
 						#'date_ad':date_ad
 						}
 				self.list.append(data)
-				print(str(count)+' '+data['title']+' '+data['address']+' '+str(data['price']))
-				count=count+1
+				#print(str(count)+' '+data['title']+' '+data['address']+' '+str(data['price']))
+			print (count)
+			count=count+1
 		return self.list
 
 	def _FindTitle(self,soup):
