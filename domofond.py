@@ -22,7 +22,7 @@ class DomofondParser(BaseParser.Parser):
 		url_second_part='&SortOrder=PricePerSquareMeterLow&DistanceFromMetro=UpTo3000m'
 		
 		self.TestOrNot(TEST)
-        print ('domofond')
+		print ('domofond')
 		for page in range(self.begin_page,self.total_pages+1):
 			url_gen = base_url+str(page)+url_second_part
 			print(page)

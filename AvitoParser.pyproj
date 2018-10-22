@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0b726808-e4b9-4777-9fd5-243bf8631d27}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>main.py</StartupFile>
+    <StartupFile>YearOfConstruction\main_for_year.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -38,12 +38,23 @@
     <Compile Include="main.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="qt\main_qt.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="qt\test_form.py" />
     <Compile Include="WorkLists.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="YearOfConstruction.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="YearOfConstruction\main_for_year.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="YearOfConstruction\" />
+    <Folder Include="qt\" />
   </ItemGroup>
   <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />

@@ -18,7 +18,7 @@ def ConectLists(list1,list2):
 def SortListByAddress(list):
 	bad_list=['минская','авиастроительный','шигалеево',]
 	good_list = [
-                   'ул',
+                   #'ул',
 				 'толбухина','гвардейская',
 				 'седова','шуртыгина',
 				 'сахарова','стрелков',
@@ -78,11 +78,12 @@ def SortListByParam(list,param_str,min_boarder, max_boarder):
 	return end_list
 
 def SortList(list):
-	list1=SortListByParam(list,'area',31.9,1000)
-	list2=SortListByParam(list1,'floors',0,15)
+	list1=SortListByParam(list,'area',20,1000)
+	list2=SortListByParam(list1,'floors',0,150)
 	list3=SortListByParam(list2,'price',2000000,3100000)
 	list4=SortListByParam(list3,'price_m2',70000,85000)
 	print(str(len(list))+' '+str(len(list1))+' '+str(len(list2))+' '+str(len(list3))+' '+str(len(list4)))
+	#print(str(len(list))+' '+str(len(list1))+' '+str(len(list3))+' '+str(len(list4)))
 	return list4
 
 def import_Google_Sheet_all_data(list):
