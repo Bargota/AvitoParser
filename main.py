@@ -31,7 +31,7 @@ union_list = list_a+list_c+list_d
 #union_list = list_c+list_d
 sort_list_address = WorkLists.SortListByAddress(union_list)
 sort_list=WorkLists.SortList(sort_list_address)
-
+ 
 WorkLists.import_Google_Sheet_all_data(sort_list)
 print('domofond adds count '+str(len(list_d)))
 print('avito adds count '+str(len(list_a)))
