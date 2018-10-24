@@ -5,7 +5,9 @@ import os
 import re
 import sys
 
-def find_regular(file):
+def find_regular_word(file):
+	"""Search for the word 'street' in addres"""
+
 	count = 0
 	count1 = 0
 	count2 = 0
@@ -27,6 +29,20 @@ def find_regular(file):
 	print(str(count2))
 	print(str(count))
 	print(str(count1))
+
+def find_regular_street(path_address,path_street):
+	all_streets = open(path_street,'r')
+	address = open(path_address,'r')
+
+	list_streets=[]
+	for street_name in all_streets:
+		list_streets.append(street_name)
+
+	for addres in address:
+		for addres in address:
+
+
+
 
 def find_street_name_from_file(path_address,path_all_streets_file):
 	all_streets = open(path_all_streets_file,'r')
@@ -133,9 +149,11 @@ file_name_streets='streets_list.txt'
 #streets = open(main_path+'\\'+file_name_streets,'r')
 
 
-#find_regular(path_file)
+#find_regular_word(path_file)
 
-find_street_name_from_file(main_path+'\\'+file_name_address,main_path+'\\'+file_name_streets)
+#find_street_name_from_file(main_path+'\\'+file_name_address,main_path+'\\'+file_name_streets)
+
+
 
 input()
 
