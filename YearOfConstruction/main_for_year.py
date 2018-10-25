@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
 import re
 import sys
 
@@ -39,9 +38,32 @@ def find_regular_street(path_address,path_street):
 		list_streets.append(street_name)
 
 	for addres in address:
-		for addres in address:
+		addres=re.sub(r'\s+',' ',addres)
+		addres=addres.lower().strip()
 
 
+		#for street in list_streets:
+
+		#	if addres.find(street)!=-1:
+		#		print(street +' '+addres)
+
+		#tmp=re.findall(r'(?:,?[^,]+,?){1}?', addres)
+		#tmp=re.split(r',', addres)
+
+		tmp=re.findall(r',? ?ул\w*[ \.][^,]*,?', addres)
+		tmp2=re.findall(r',?[^,]+ ул\w*,?', addres)
+		if len(tmp)==0 and len(tmp2)==0:
+			for street in list_streets:
+				if addres.find(street.lower().strip())!=-1:
+					print(street.strip() +' '+addres)
+			
+		else:
+			if len(tmp2)==0:
+				pass
+				#print(tmp)
+			if len(tmp)==0:
+				pass
+				#print(tmp2)
 
 
 def find_street_name_from_file(path_address,path_all_streets_file):
@@ -150,8 +172,8 @@ file_name_streets='streets_list.txt'
 
 
 #find_regular_word(path_file)
-
 #find_street_name_from_file(main_path+'\\'+file_name_address,main_path+'\\'+file_name_streets)
+find_regular_street(main_path+'\\'+file_name_address,main_path+'\\'+file_name_streets)
 
 
 
