@@ -80,8 +80,8 @@ def SortListByParam(list,param_str,min_boarder, max_boarder):
 def SortList(list):
 	list1=SortListByParam(list,'area',30,1000)
 	list2=SortListByParam(list1,'floors',0,150)
-	list3=SortListByParam(list2,'price',2000000,3200000)
-	list4=SortListByParam(list3,'price_m2',70000,88000)
+	list3=SortListByParam(list2,'price',2000000,3300000)
+	list4=SortListByParam(list3,'price_m2',70000,90000)
 	print(str(len(list))+' '+str(len(list1))+' '+str(len(list2))+' '+str(len(list3))+' '+str(len(list4)))
 	#print(str(len(list))+' '+str(len(list1))+' '+str(len(list3))+' '+str(len(list4)))
 	return list4
