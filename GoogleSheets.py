@@ -10,7 +10,7 @@ class myGoogleSheet():
 	def __init__(self):
 		CREDENTIALS_FILE = 'AvitoParser-fa42c491fb6e.json'  # имя файла с закрытым ключом
 		credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE, ['https://www.googleapis.com/auth/spreadsheets',
-                                                                                  'https://www.googleapis.com/auth/drive'])
+																				  'https://www.googleapis.com/auth/drive'])
 		httpAuth = credentials.authorize(httplib2.Http())
 		self.service = apiclient.discovery.build('sheets', 'v4', http = httpAuth)
 
@@ -48,7 +48,7 @@ class myGoogleSheet():
 	def ClearSheet(self):
 		results = self.service.spreadsheets().values().batchClear(
 																spreadsheetId=self.spreadsheetId,
-															    body={
+																body={
 																		"ranges": ['Смотреть тут!A1:Z10000']
 																	 }
 															).execute()
@@ -69,6 +69,15 @@ class myGoogleSheet():
 																		}
 															).execute()
 
+	def ReadData(self,range):
+		'''Read data in range'''
+		result = self.service.spreadsheets().values().get(spreadsheetId = self.spreadsheetId,
+													range=range
+												   
+													).execute()
+		
+
+		return result['values']
 
 
 
@@ -101,7 +110,7 @@ class myGoogleSheet():
 #         "majorDimension": "ROWS",     # сначала заполнять ряды, затем столбцы (т.е. самые внутренние списки в values - это ряды)
 #         "values": [["123"]]},
 
-        
+		
 #    ]
 #}).execute()
 
@@ -120,7 +129,7 @@ class myGoogleSheet():
 #results = service.spreadsheets().values().batchUpdate(spreadsheetId = '1RvgTYKbK89KQpqN6nW7w95yBX7BlGXbr3ZjHNgdnQ_o', body = {
 #    "valueInputOption": "USER_ENTERED",
 #    "data": [
-        
+		
 #		 {"range": "Сие есть название листа!A5",
 #         "majorDimension": "COLUMNS",  # сначала заполнять столбцы, затем ряды (т.е. самые внутренние списки в values - это столбцы)
 #         "values": [["5"]]}
