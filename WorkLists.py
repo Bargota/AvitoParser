@@ -149,9 +149,10 @@ def SortList(list,list_dict_param):
         list_for_log.append(len(list1))
         list=list1
 
+    
     for i in list_for_log:
         print(str(i),end=' ')
-
+    
     
     return list
 

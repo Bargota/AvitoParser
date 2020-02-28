@@ -1,7 +1,7 @@
 import requests
 import re
 import sys
-sys.path.insert(0, 'C:\\v.orlov\\Programm\\python\\AvitoParser\\YearOfConstruction')
+sys.path.insert(0, 'P:\\Programm\\Pyton\\AvitoParser\\YearOfConstruction\\')
 from main_for_year import FoundYearFromAddres
 from GoogleSheets import myGoogleSheet
 
@@ -44,21 +44,27 @@ class Parser():
         return ads
 
     def _FindArea(self,title_str):
-        area = re.findall(r'(\d{2}.?\d?) м²',title_str)
-        float_area  = float(area[0])
-        return float_area
+        if title_str!="":
+            area = re.findall(r'(\d{2}.?\d?) м²',title_str)
+            float_area  = float(area[0])
+            return float_area
+        return 0
 
     def _FindPriceM2(self,price,area):
-        return round(price/area,0)
+        if area!=0:
+            return round(price/area,0)
+        return 0
 
     def _FindFloors(self,title_str):
+        if title_str!="":
             floor = re.findall(r'/(\d{1,2}) эт.',title_str)
             floors  = int(floor[0])
             return floors
+        return 0
 
     def _FindYear(self,addres_str):
         my_found_year_from_addres=FoundYearFromAddres()
-        path_file_streets='C:\\v.orlov\\Programm\\python\\AvitoParser\\YearOfConstruction\\'
+        path_file_streets='P:\\Programm\\Pyton\\AvitoParser\\YearOfConstruction\\'
         name_file_streets='streets_list.txt'
         year = my_found_year_from_addres.FindYearOfConstruction(addres_str,path_file_streets+name_file_streets,self.list_addres_and_year)
         return year,my_found_year_from_addres.street_name +' '+my_found_year_from_addres.house_number

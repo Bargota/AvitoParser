@@ -10,27 +10,32 @@ class AvitoParser(BaseParser.Parser):
     
     def GetTotalPages(self,html):
         soup = BeautifulSoup(html,'lxml')
-        tmp_pages = soup.find('div', class_='pagination-pages').find_all('a', class_='pagination-page')[-1].get('href')
+        div = soup.find('div', class_='js-pages')
+        span_arr=div.find_all('span', class_='pagination-item-1WyVp')
+        span=span_arr[-2].text
         #total_pages = tmp_pages.split('=')[1]
-        self.total_pages = tmp_pages.split('=')[1].split('&')[0]
+        #self.total_pages = tmp_pages.split('=')[1].split('&')[0]
+        self.total_pages = span
         self.total_pages =int(self.total_pages)
         return self.total_pages
 
     def GetData(self,TEST=0):
-        base_url = 'https://www.avito.ru/kazan/kvartiry/prodam?'
-        page_url = 'p='
+        #base_url = 'https://www.avito.ru/kazan/kvartiry/prodam?'
+        #page_url = 'p='
         
         self.TestOrNot(TEST)
         print ('avito')
         count=1
         for i in range(self.begin_page,self.total_pages+1):	
             #url_gen = base_url+page_url+str(i)+'&f=549_5696-5697'
-            url_gen = base_url+page_url+'f=549_5695-5696-5697.59_13987b0&p='+str(i)+'&pmax=3200000&pmin=2000000'
+
+            #url_gen = base_url+page_url+'f=549_5695-5696-5697.59_13987b0&p='+str(i)+'&pmax=2000000&pmin=1000000'
             
-            html = GetHTMLText(url_gen)
+            #html = GetHTMLText(self.url)
+            html = GetHTMLText(self.url)
             soup = BeautifulSoup(html,'lxml')
 
-            ads=self.FindAdsInPage(soup,'div','catalog-list',
+            ads=self.FindAdsInPage(soup,'div','js-catalog_serp',
                                    'div','item_table')
             print (count)
             for j in ads:
@@ -60,25 +65,32 @@ class AvitoParser(BaseParser.Parser):
                         'found_addres':found_addres
                         #'date_ad':date_ad
                         }
-                self.list.append(data)
-                #print(str(count)+' '+data['title']+' '+data['address']+' '+str(data['price']))
+                self.list.append(data)                
+                print(str(count)+' '+data['title']+' '+data['address']+' '+str(data['price'])+'Руб.')  
             
             count=count+1
         return self.list
 
     def _FindTitle(self,soup):
         try:
-            title = soup.find('div',class_='description').find('span').text
+            #title = soup.find('div',class_='description').find('span').text
+            h3 = soup.find('h3',class_='snippet-title')
+            a=h3.find('a',class_='snippet-link')
+            title_text=a.text 
+            #print(title_text)           
         except:
-            title=''
-        return title
+            title_text=''
+        return title_text
 
     def _FindPrice(self,soup):
         try:
-            price_str = soup.find('div',class_='description').find('div',class_='about').find('span',class_='price').text.strip()
+           #price_str = soup.find('div',class_='description').find('div',class_='about').find('span',class_='price').text.strip()
+            price_str= soup.find('div',class_='snippet-price-row').find('span',class_='snippet-price').text.strip()            
             price_str= price_str.replace(' ' , '')
             price_str=price_str[:-1]
+            #print(price_str)
             price = int(price_str)
+
         except:
             price=-1
         return price
@@ -98,14 +110,15 @@ class AvitoParser(BaseParser.Parser):
 
     def _FindUrl(self,soup):
         try:
-            url ='https://www.avito.ru'+ soup.find('div',class_='description').find('h3').find('a').get('href')
+            url ='https://www.avito.ru'+ soup.find('div',class_='snippet-title-row').find('h3').find('a').get('href')
         except:
             url=''
         return url
 
     def _FindAddress(self,soup):
         try:
-            address = soup.find('div',class_='description').find('p',class_='address').text.strip()
+            #address = soup.find('div',class_='description').find('p',class_='address').text.strip()
+            address = soup.find('div',class_='description').find('div',class_='item-address').find('span',class_='item-address__string').text.strip()
         except:
             address=''
         return address

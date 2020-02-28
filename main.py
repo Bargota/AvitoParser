@@ -12,7 +12,7 @@ from WorkLists import Settings
 
 
 start_time = time.time()
-TEST=1
+TEST=0
 
 my_set = Settings()
 my_set,good_read_flag = WorkLists.ReadSettingsAll('Настройки!B2:D5','Настройки!G2:G','Настройки!H2:H','Настройки!K2:K4')
@@ -20,8 +20,8 @@ my_set,good_read_flag = WorkLists.ReadSettingsAll('Настройки!B2:D5','Н
 if good_read_flag:
     list_a=[]
     try:
-        #my_a=avito.AvitoParser('https://www.avito.ru/kazan/kvartiry/prodam?f=549_5695-5696-5697.59_13987b0&p=1&pmax=3200000&pmin=2000000')
-        my_a=avito.AvitoParser(my_set.url_avito)
+        my_a=avito.AvitoParser('https://www.avito.ru/kazan/kvartiry/prodam?f=549_5695-5696-5697.59_13987b0&p=1&pmax=2000000&pmin=1000000')
+        #my_a=avito.AvitoParser(my_set.url_avito)
         list_a=my_a.GetData(TEST)
         print("--- %s seconds ---" % (time.time() - start_time))
     except:
@@ -50,8 +50,8 @@ if good_read_flag:
 
 
     #union_list = list_c+list_d
-    sort_list_address = WorkLists.SortListByAddress(union_list,my_set.bad_streets,my_set.good_streets)
-    sort_list=WorkLists.SortList(sort_list_address,my_set.list_dict_param)
+    sort_list = WorkLists.SortListByAddress(union_list,my_set.bad_streets,my_set.good_streets)
+    sort_list=WorkLists.SortList(sort_list,my_set.list_dict_param)
 
     WorkLists.import_Google_Sheet_all_data(sort_list)
     print('domofond adds count '+str(len(list_d)))
