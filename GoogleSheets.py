@@ -75,9 +75,10 @@ class myGoogleSheet():
 													range=range
 												   
 													).execute()
-		
-
-		return result['values']
+		if 'values'in result:
+			return result['values']
+		else:
+			return []
 
 
 

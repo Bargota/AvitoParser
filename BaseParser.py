@@ -1,7 +1,10 @@
 import requests
 import re
 import sys
-sys.path.insert(0, 'P:\\Programm\\Pyton\\AvitoParser\\YearOfConstruction\\')
+#sys.path.insert(0, 'P:\\Programm\\Pyton\\AvitoParser\\YearOfConstruction\\')
+sys.path.insert(0, 'D:\\v.orlov\\Programm\\python\\2\\AvitoParser\\YearOfConstruction\\')
+path_file_streets='D:\\v.orlov\\Programm\\python\\2\\AvitoParser\\YearOfConstruction\\'
+name_file_streets='streets_list.txt'
 from main_for_year import FoundYearFromAddres
 from GoogleSheets import myGoogleSheet
 
@@ -38,14 +41,16 @@ class Parser():
 
     def FindAdsInPage(self,soup,key,class_,key_all,class_all):
         try:
-            ads = soup.find(key,class_=class_).find_all(key_all,class_=class_all)
+            all = soup.find(key,class_=class_)
+            ads=all.find_all(key_all,class_=class_all)
         except:
             ads = []
         return ads
 
     def _FindArea(self,title_str):
         if title_str!="":
-            area = re.findall(r'(\d{2}.?\d?) м²',title_str)
+
+            area = re.findall(r'( \d{2}[.,]?\d?) м²',title_str)
             float_area  = float(area[0])
             return float_area
         return 0
@@ -64,7 +69,18 @@ class Parser():
 
     def _FindYear(self,addres_str):
         my_found_year_from_addres=FoundYearFromAddres()
-        path_file_streets='P:\\Programm\\Pyton\\AvitoParser\\YearOfConstruction\\'
-        name_file_streets='streets_list.txt'
+        #path_file_streets='D:\\v.orlov\\Programm\\python\\2\\AvitoParser\\YearOfConstruction\\'
+        #name_file_streets='streets_list.txt'
         year = my_found_year_from_addres.FindYearOfConstruction(addres_str,path_file_streets+name_file_streets,self.list_addres_and_year)
         return year,my_found_year_from_addres.street_name +' '+my_found_year_from_addres.house_number
+
+    def _SortRepeat(self,list):
+        list=sorted(list,key= lambda d: d['address'])
+        final_list=[]
+        for i in range(len(list)):
+            if i==0:
+                final_list.append(list[i])
+            else:
+                if list[i]['address']!=final_list[-1]['address']:
+                    final_list.append(list[i])
+        return final_list

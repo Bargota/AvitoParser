@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 #import csv
 #import GoogleSheets
 import BaseParser
+from datetime import datetime, date, time,timedelta
+import re
 
 
 class AvitoParser(BaseParser.Parser):
@@ -20,19 +22,12 @@ class AvitoParser(BaseParser.Parser):
         return self.total_pages
 
     def GetData(self,TEST=0):
-        #base_url = 'https://www.avito.ru/kazan/kvartiry/prodam?'
-        #page_url = 'p='
-        
+                
         self.TestOrNot(TEST)
         print ('avito')
         count=1
-        for i in range(self.begin_page,self.total_pages+1):	
-            #url_gen = base_url+page_url+str(i)+'&f=549_5696-5697'
-
-            #url_gen = base_url+page_url+'f=549_5695-5696-5697.59_13987b0&p='+str(i)+'&pmax=2000000&pmin=1000000'
-            
-            #html = GetHTMLText(self.url)
-            html = GetHTMLText(self.url)
+        for i in range(self.begin_page,self.total_pages+1):	            
+            html = GetHTMLText(self.url+'&p='+str(i))
             soup = BeautifulSoup(html,'lxml')
 
             ads=self.FindAdsInPage(soup,'div','js-catalog_serp',
@@ -46,12 +41,12 @@ class AvitoParser(BaseParser.Parser):
                 area  = self._FindArea(title)
                 price_m2=self._FindPriceM2(price,area)
                 floors = self._FindFloors(title)
+                date = self._FindDate(j)
                 year,found_addres = self._FindYear(address)
-            
-                try:
-                    date_ad=description.find('div',class_='data').find('div').get('data-absolute-date')            
-                except:
-                    date_ad='' 
+                delta_day=(datetime.today()-date).days
+                #if delta_day>=2:
+                #    return self.list
+                
 
                 
                 data = {'title':title,
@@ -62,13 +57,16 @@ class AvitoParser(BaseParser.Parser):
                         'area':area,
                         'floors':floors,
                         'year':year,
-                        'found_addres':found_addres
+                        'found_addres':found_addres,
+                        'date':date
                         #'date_ad':date_ad
                         }
                 self.list.append(data)                
-                print(str(count)+' '+data['title']+' '+data['address']+' '+str(data['price'])+'Руб.')  
+                #print(str(count)+' '+data['title']+' '+data['address']+' '+str(data['price'])+'Руб.')  
+                print(str(count)+' '+data['date'].strftime("%d.%m.%Y")+' '+str(data['price'])+'Руб.')  
             
-            count=count+1
+            count=count+1        
+        #self.list=self._SortRepeat()
         return self.list
 
     def _FindTitle(self,soup):
@@ -94,6 +92,27 @@ class AvitoParser(BaseParser.Parser):
         except:
             price=-1
         return price
+
+    def _FindDate(self,soup):
+        try:
+            #address = soup.find('div',class_='description').find('p',class_='address').text.strip()
+            date0 = soup.find('div',class_='description').find('div',class_='data')
+            date_str=date0.find('div',class_='snippet-date-info').text.strip()
+            num1= date_str.find('час')
+            num2= date_str.find('мин')
+            if num1>0 or num2>0:
+                date=datetime.today()
+                #date=date.strftime("%d.%m.%Y")
+            else:
+                #d = datetime.today() - timedelta(days=days_to_subtract)
+                num3 = re.findall(r'(\d{1,2}) д',date_str)
+                if not(len(num3)==0):
+                    date = datetime.today() - timedelta(days=int(num3[0]))
+                else:
+                    date = datetime.strptime("1/1/20 00:00", "%d/%m/%y %H:%M")
+        except:
+            date=datetime.strptime("1/1/19 00:00", "%d/%m/%y %H:%M") 
+        return date
          
     #def _FindArea(self,title_str):
     #	area = re.findall(r'(\d{2}.?\d?) м²',title_str)
@@ -122,6 +141,12 @@ class AvitoParser(BaseParser.Parser):
         except:
             address=''
         return address
+
+    #def _SortRepeat(self):
+    #    self.list=sorted(self.list,key= lambda d: d['address'])
+    #    for i in range(len(self.list)):
+    #        if self.list[i]==self.list[i+1]:
+    #            self.list.remove(i)
 
 
 

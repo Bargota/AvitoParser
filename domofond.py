@@ -7,31 +7,34 @@ from bs4 import BeautifulSoup
 #import Cian
 import BaseParser
 #import WorkLists
+from datetime import datetime, date, time
 
 TEST=0
 
 class DomofondParser(BaseParser.Parser):	
     def GetTotalPages(self,html):
         soup = BeautifulSoup(html,'lxml')
-        total_pages_str = soup.find('div', class_='b-pager').find('ul',class_='e-pages').find_all('li')[-1].text        
+        total_pages_str = soup.find('nav', class_='pagination__root___38MdD').find('ul',class_='pagination__mainPages___2v12k').find_all('li')[-1].text        
         self.total_pages = int(total_pages_str)
         return int(self.total_pages)
 
     def GetData(self,TEST=0):
         
-        base_url='https://www.domofond.ru/prodazha-nedvizhimosti/search?MetroIds=289%2C292%2C293%2C290%2C291&PropertyTypeDescription=kvartiry&PriceFrom=2000000&PriceTo=3200000&Rooms=One%2CTwo&Page='
-        url_second_part='&SortOrder=PricePerSquareMeterLow&DistanceFromMetro=UpTo3000m'
+        #base_url='https://www.domofond.ru/prodazha-nedvizhimosti/search?MetroIds=289%2C292%2C293%2C290%2C291&PropertyTypeDescription=kvartiry&PriceFrom=2000000&PriceTo=3200000&Rooms=One%2CTwo&Page='
+        #url_second_part='&SortOrder=PricePerSquareMeterLow&DistanceFromMetro=UpTo3000m'
         
         self.TestOrNot(TEST)
         print ('domofond')
+        
         for page in range(self.begin_page,self.total_pages+1):
-            url_gen = base_url+str(page)+url_second_part
+            #url_gen = base_url+str(page)+url_second_part
+            url_gen = self.url+"&Page="+str(page)
             print(page)
             soup = BeautifulSoup(self.GetHTMLText(url_gen),'lxml')
             
-            ads=self.FindAdsInPage(soup,'div','g-padding-bottom-lg',
-                                   'div','b-results-tile')
-
+            ads=self.FindAdsInPage(soup,'div','search-results__itemCardList___RdWje','a','long-item-card__item___ubItG')
+                                   
+            
             for item in ads:
                 title=self._FindTitle(item)
                 price=self._FindPrice(item)
@@ -40,9 +43,10 @@ class DomofondParser(BaseParser.Parser):
                 area  = self._FindArea(title)
                 price_m2=self._FindPriceM2(price,area)                
                 floors = self._FindFloors(title)
+                date = self._FindDate(item)
                 year,found_addres = self._FindYear(address)
 
-                dict_ad = {'title':title,
+                data = {'title':title,
                             'price':price,
                             'price_m2':price_m2,
                             'address':address,
@@ -50,25 +54,54 @@ class DomofondParser(BaseParser.Parser):
                             'area':area,
                             'floors':floors,
                             'year':year,
-                            'found_addres':found_addres
+                            'found_addres':found_addres,
+                            'date':date
                             #'date_ad':date_ad,
                             #'type_house':type_house}
                             }
-                self.list.append(dict_ad)
+                self.list.append(data)
+                
+                print(str(page)+' '+data['title']+' '+data['address']+' '+str(data['price'])+'Руб.') 
+            
         return self.list
 
     def _FindTitle(self,soup):
         try:
-            title = soup.find('a').find('span',class_='e-tile-type').find('strong').text.strip()
+            #title = soup.find('a').find('span',class_='e-tile-type').find('strong').text.strip()
+            title = soup.find('div',class_='long-item-card__informationHeaderRight___3bkKw').text.strip()
         except:
             title=''
         return title
 
+    def _FindDate(self,soup):  
+        
+        try:
+            #address = soup.find('div',class_='description').find('p',class_='address').text.strip()
+            date0 = soup.find('div',class_='long-item-card__information___YXOtb').find('div',class_='long-item-card__informationFooterRight___3Xw4i').text
+            date_str=date0.find('div',class_='snippet-date-info').text.strip()
+            num1= date_str.find('час')
+            num2= date_str.find('мин')
+            if num1>0 or num2>0:
+                date=datetime.today()
+                #date=date.strftime("%d.%m.%Y")
+            else:
+                #d = datetime.today() - timedelta(days=days_to_subtract)
+                num3 = re.findall(r'(\d{1,2}) д',date_str)
+                if not(len(num3)==0):
+                    date = datetime.today() - timedelta(days=int(num3[0]))
+                else:
+                    date = datetime.strptime("1/1/20 00:00", "%d/%m/%y %H:%M")
+        except:
+            date=datetime.strptime("1/1/19 00:00", "%d/%m/%y %H:%M") 
+        return date      
+        
+
     def _FindPrice(self,soup):
         try:
-            price_str = soup.find('a').find('h2',class_='e-tile-price').text.strip()
-            price_str= price_str.replace(' РУБ.','')
-            price_str = price_str.replace('\xa0','')				
+            #price_str = soup.find('a').find('h2',class_='e-tile-price').text.strip()
+            price_str = soup.find('span',class_='long-item-card__price___3A6JF').text.strip()
+            price_str= price_str.replace(' ₽','')
+            price_str = price_str.replace(' ','')				
             price = int(price_str)
         except:
             price=-1
@@ -89,14 +122,16 @@ class DomofondParser(BaseParser.Parser):
 
     def _FindUrl(self,soup):
         try:
-            url ='https://www.domofond.ru'+soup.find('a').get('href')
+           # url ='https://www.domofond.ru'+soup.find('a').get('href')
+            url ='https://www.domofond.ru'+soup.get('href')
         except:
             url=''
         return url
 
     def _FindAddress(self,soup):
         try:
-            address =  soup.find('a').find('span',class_='e-tile-address').text.strip()
+            #address =  soup.find('a').find('span',class_='e-tile-address').text.strip()
+            address =  soup.find('div',class_='long-item-card__informationMain___LnRL6').find('span',class_='long-item-card__address___PVI5p').text.strip()
         except:
             address=''
         return address

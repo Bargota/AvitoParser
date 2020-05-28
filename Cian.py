@@ -33,8 +33,8 @@ class Cian(BaseParser.Parser):
             #	ads = soup.find('div',class_='_93444fe79c-wrapper--1Z8Nz').find_all('div',class_='_93444fe79c-card--2Jgih')
             #except:
             #	ads = []
-            ads=self.FindAdsInPage(soup,'div','_93444fe79c-wrapper--1Z8Nz',
-                                   'div','_93444fe79c-card--2Jgih')
+            ads=self.FindAdsInPage(soup,'div','_93444fe79c--wrapper--E9jWb',
+                                   'div','_93444fe79c--card--_yguQ')
 
             for item in ads:
                 title=self._FindTitle(item)
@@ -46,7 +46,7 @@ class Cian(BaseParser.Parser):
                 floors = self._FindFloors(title)
                 year,found_addres = self._FindYear(address)
 
-                dict_ad = {'title':title,
+                data = {'title':title,
                             'price':price,
                             'price_m2':price_m2,
                             'address':address,
@@ -58,19 +58,21 @@ class Cian(BaseParser.Parser):
                             #'date_ad':date_ad,
                             #'type_house':type_house}
                             }
-                self.list.append(dict_ad)
+                self.list.append(data)
+                print(str(page)+' '+data['title']+' '+data['address']+' '+str(data['price'])+'Руб.') 
         return self.list
 
     def _FindTitle(self,soup):
         try:
-            title = soup.find('div',class_='c6e8ba5398-info-section--28o47 c6e8ba5398-main-info--Rfnfh').find('div',class_='c6e8ba5398-title--3WDDX').text
+            title = soup.find('div',class_='c6e8ba5398--main-info--oWcMk').text
+            
         except:
             title=''
         return title
 
     def _FindPrice(self,soup):
         try:
-            price_str = soup.find('div',class_='c6e8ba5398-info-section--28o47 c6e8ba5398-main-info--Rfnfh').find('div',class_='c6e8ba5398-header--6WXYW').text
+            price_str = soup.find('div',class_='c6e8ba5398--info--1fcZi').find('div',class_='c6e8ba5398--header--1dF9r').text
             price = int(price_str.replace(' ','').replace('₽',''))
         except:
             price=0
@@ -78,14 +80,14 @@ class Cian(BaseParser.Parser):
 
     def _FindUrl(self,soup):
         try:
-            url = soup.find('div',class_='c6e8ba5398-info-section--28o47 c6e8ba5398-main-info--Rfnfh').find('a').get('href')
+            url = soup.find('div',class_='c6e8ba5398--main-info--oWcMk').find('a').get('href')
         except:
             url=''
         return url
 
     def _FindAddress(self,soup):
         try:
-            address = soup.find('div',class_='c6e8ba5398-address-links--1I9u5').find('span').get('content')
+            address = soup.find('div',class_='c6e8ba5398--address_info--14AIw').find('span').get('content')
         except:
             address=''
         return address

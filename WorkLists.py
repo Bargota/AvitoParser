@@ -27,9 +27,9 @@ def ReadSettingsAll(range_param,range_good,range_bad,range_url):
         my_settings.good_streets=List2List( my_GS_settings.ReadData(range_good))
         my_settings.bad_streets=List2List( my_GS_settings.ReadData(range_bad))
         urls=my_GS_settings.ReadData(range_url)
-        my_settings.url_avito=urls[0]
-        my_settings.url_domofond=urls[1]
-        my_settings.url_cian=urls[2]
+        my_settings.url_avito=urls[0][0]
+        my_settings.url_domofond=urls[1][0]
+        my_settings.url_cian=urls[2][0]
         
         my_settings.list_dict_param= ReadSettingsParam(my_settings.list_params)
         if flag_good_read:
@@ -61,8 +61,9 @@ def ReadSettingsStreetsName(good_street,bad_street):
 
 def List2List(list):
     simple_list=[]
-    for i in list:
-        simple_list.append(i[0])
+    if len(list)!=0:    
+        for i in list:
+            simple_list.append(i[0])
     return simple_list
 
 
@@ -89,24 +90,26 @@ def SortListByAddress(list,bad_list,good_list):
         sum_find=0
         flag_continue=0
         address_in_lower_case = i['address'].lower()
-        for item_bad_list in bad_list:
-            finder_bad = address_in_lower_case.find(item_bad_list)	
-            if finder_bad>0:
-                #list.remove(i)
-                flag_continue=1
-                continue
+        if len(bad_list)!=0:
+            for item_bad_list in bad_list:
+                finder_bad = address_in_lower_case.find(item_bad_list)	
+                if finder_bad>0:
+                    #list.remove(i)
+                    flag_continue=1
+                    continue
             
-        if flag_continue==1:
-            continue
-
-        for item_good_list in good_list:			
-            finder = address_in_lower_case.find(item_good_list)			
-            if finder>=0:
-                sum_find=sum_find+1
-            if sum_find>0:
+            if flag_continue==1:
                 continue
-        if sum_find==0:
-            continue
+        
+        if len(good_list)!=0:
+            for item_good_list in good_list:			
+                finder = address_in_lower_case.find(item_good_list)			
+                if finder>=0:
+                    sum_find=sum_find+1
+                if sum_find>0:
+                    continue
+            if sum_find==0:
+                continue
         final_list.append(i)
     return final_list
 
@@ -166,6 +169,7 @@ def import_Google_Sheet_all_data(list):
             #i['price_m2'] =  i['price_m2'].replace('??','?2')
             i['address'] =  i['address'].replace('?','-')
             row_list=[
+                       i['date'].strftime("%d.%m.%Y"),
                        i['title'],
                        i['price'],
                        i['price_m2'],
@@ -175,6 +179,8 @@ def import_Google_Sheet_all_data(list):
                        i['address'],
                        i['urlad'],
                        str(i['floors'])
+                       
+
                        #data['type_house'],
                        #data['date_ad']
                        ]
