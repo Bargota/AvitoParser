@@ -27,10 +27,9 @@ class AvitoParser(BaseParser.Parser):
         print ('avito')
         count=1
         for i in range(self.begin_page,self.total_pages+1):
-            #if i==20:
-            #    a=4
-            #else:
-            #    break
+            if TEST==2:
+                if i!=self.total_pages:
+                    continue
             html = GetHTMLText(self.url+'&p='+str(i))
             soup = BeautifulSoup(html,'lxml')
 

@@ -1,10 +1,10 @@
 import requests
 import re
 import sys
-sys.path.insert(0, 'P:\\Project\\MyProject\\AvitoParser\\YearOfConstruction\\')
-path_file_streets='P:\\Project\\MyProject\\AvitoParser\\YearOfConstruction\\'
-#sys.path.insert(0, 'D:\\v.orlov\\Programm\\python\\2\\AvitoParser\\YearOfConstruction\\')
-#path_file_streets='D:\\v.orlov\\Programm\\python\\2\\AvitoParser\\YearOfConstruction\\'
+#sys.path.insert(0, 'P:\\Project\\MyProject\\AvitoParser\\YearOfConstruction\\')
+#path_file_streets='P:\\Project\\MyProject\\AvitoParser\\YearOfConstruction\\'
+sys.path.insert(0, 'D:\\v.orlov\\Programm\\python\\2\\AvitoParser\\YearOfConstruction\\')
+path_file_streets='D:\\v.orlov\\Programm\\python\\2\\AvitoParser\\YearOfConstruction\\'
 name_file_streets='streets_list.txt'
 from main_for_year import FoundYearFromAddres
 from GoogleSheets import myGoogleSheet
@@ -135,6 +135,7 @@ class Parser():
                     if len(_manth)>0:
                         date_now = datetime.today()
                         date = datetime(date_now.year, i+1, int(interval_size[0][1]))
+                        break
             else:
                 date = datetime.strptime("1/1/10 00:00", "%d/%m/%y %H:%M")
        

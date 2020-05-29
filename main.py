@@ -10,21 +10,23 @@ sys.path.insert(0, 'D:\\v.orlov\\Programm\\python\\2\\AvitoParser\\YearOfConstru
 
 from WorkLists import Settings
 
+TEST_ONLY_LAST_PAGE=2
 TEST_ONLY_TWO_PAGE=1
 TEST_ALL_PAGE=0
 
 
-start_time = time.time()
-TEST=TEST_ONLY_TWO_PAGE
-#TEST=TEST_ALL_PAGE
 
+start_time = time.time()
+#TEST=TEST_ONLY_TWO_PAGE
+TEST=TEST_ALL_PAGE
+#TEST=TEST_ONLY_LAST_PAGE
 
 my_set = Settings()
-if TEST==TEST_ALL_PAGE:    
+if TEST==TEST_ALL_PAGE or TEST==TEST_ONLY_LAST_PAGE:    
     my_set,good_read_flag = WorkLists.ReadSettingsAll('Настройки!B2:D7','Настройки!G2:G','Настройки!H2:H','Настройки!K2:K4')
 else:
     #list=['https://www.avito.ru/kazan/kvartiry/prodam-ASgBAgICAUSSA8YQ?pmax=2000000&pmin=1000000']
-    my_set.url_avito='https://www.avito.ru/kazan/kvartiry/prodam-ASgBAgICAUSSA8YQ?pmax=2000000&pmin=1000000'
+    my_set.url_avito='https://www.avito.ru/kazan/kvartiry/prodam-ASgBAgICAUSSA8YQ?pmax=2100000&pmin=1500000'
     my_set.url_domofond='https://www.domofond.ru/prodazha-kvartiry-kazan-c1330?PriceFrom=1300000&PriceTo=2000000'
     my_set.url_cian='https://kazan.cian.ru/cat.php?currency=2&deal_type=sale&engine_version=2&maxprice=2000000&minprice=1300000&offer_type=flat&quality=1&region=4777'
     good_read_flag=True
@@ -33,13 +35,13 @@ if good_read_flag:
    
 
     list_d=[]
-    #try:
-    #    #my_d=domofond.domofondparser('https://www.domofond.ru/prodazha-nedvizhimosti/search?metroids=289%2c292%2c293%2c290%2c291&propertytypedescription=kvartiry&pricefrom=2000000&priceto=3200000&rooms=one%2ctwo&sortorder=pricepersquaremeterlow&distancefrommetro=upto3000m')
-    #    my_d=domofond.DomofondParser(my_set.url_domofond)
-    #    list_d = my_d.GetData(TEST)
-    #    print("--- %s seconds ---" % (time.time() - start_time))
-    #except:
-    #    print('error: Domofond not parce')
+    try:
+        #my_d=domofond.domofondparser('https://www.domofond.ru/prodazha-nedvizhimosti/search?metroids=289%2c292%2c293%2c290%2c291&propertytypedescription=kvartiry&pricefrom=2000000&priceto=3200000&rooms=one%2ctwo&sortorder=pricepersquaremeterlow&distancefrommetro=upto3000m')
+        my_d=domofond.DomofondParser(my_set.url_domofond)
+        list_d = my_d.GetData(TEST)
+        print("--- %s seconds ---" % (time.time() - start_time))
+    except:
+        print('error: Domofond not parce')
     list_a=[]
     try:
         #my_a=avito.AvitoParser('https://www.avito.ru/kazan/kvartiry/prodam-ASgBAgICAUSSA8YQ?pmax=2100000&pmin=1500000&p=20')
@@ -67,6 +69,8 @@ if good_read_flag:
     #sort_list=WorkLists.SortList(sort_list,my_set.list_dict_param)
 
     sort_list = WorkLists.SortListByAddress(union_list,my_set.bad_streets,my_set.good_streets)
+    print('Сортировка по адресу. Количество до\после')
+    print(str(len(union_list))+'/'+str(len(sort_list)))
     sort_list=WorkLists.SortList(sort_list,my_set.list_dict_param)
 
     WorkLists.import_Google_Sheet_all_data(sort_list)

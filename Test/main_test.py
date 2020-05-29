@@ -66,6 +66,10 @@ def MainFindDate():
     Fin.close()
 
 #MainFindDate()
-print('1')
-print('/n')
-print('1')
+a=5
+b=4
+if a==b:
+    print('==')
+else:
+    print('=')
+

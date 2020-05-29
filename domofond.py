@@ -27,6 +27,9 @@ class DomofondParser(BaseParser.Parser):
         print ('domofond')
         
         for page in range(self.begin_page,self.total_pages+1):
+            if TEST==2:
+                if page!=self.total_pages:
+                    continue
             #url_gen = base_url+str(page)+url_second_part
             url_gen = self.url+"&Page="+str(page)
             print(page)

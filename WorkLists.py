@@ -1,6 +1,7 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import GoogleSheets
+from datetime import datetime, date, time,timedelta
 
 
 class Settings():
@@ -156,7 +157,7 @@ def SortList(list,list_dict_param):
         list_for_log.append(len(list1))
         list=list1
     print('Сортировка по каждому из параметров')
-    print('площадь, этажность, цена, цена за м2, этаж, дата')
+    print('общее количество, площадь, этажность, цена, цена за м2, этаж, дата')
     for i in list_for_log:
         print(str(i),end=' ')
     print('')
