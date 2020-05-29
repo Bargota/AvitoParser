@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <InterpreterId>{1f3fa988-340d-4622-bdd8-d4a9e2f1964b}</InterpreterId>
+    <InterpreterId>{1125dc0e-c620-499b-aff9-09e02eba837d}</InterpreterId>
     <InterpreterVersion>3.5</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
@@ -21,7 +21,7 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
-    <InterpreterReference Include="{1f3fa988-340d-4622-bdd8-d4a9e2f1964b}\3.5" />
+    <InterpreterReference Include="{1125dc0e-c620-499b-aff9-09e02eba837d}\3.5" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseParser.py">
@@ -38,6 +38,9 @@
     <Compile Include="main.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Test\main_test.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="WorkLists.py">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +52,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Test\" />
     <Folder Include="YearOfConstruction\" />
   </ItemGroup>
   <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />

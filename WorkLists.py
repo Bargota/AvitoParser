@@ -130,33 +130,37 @@ def SortListByFloors(list,boarder_floor=15):
 def SortListByParam(list,param_str,min_boarder, max_boarder):
     end_list=[]
     for i in list:
-        if i[param_str]>min_boarder and i[param_str]<max_boarder:
+        if i[param_str]>=min_boarder and i[param_str]<=max_boarder:
             end_list.append(i)
     return end_list
 
-#def SortList(list):
-#	list1=SortListByParam(list,'area',30,1000)
-#	list2=SortListByParam(list1,'floors',0,150)
-#	list3=SortListByParam(list2,'price',2000000,3200000)
-#	list4=SortListByParam(list3,'price_m2',0,90000)
-#	print(str(len(list))+' '+str(len(list1))+' '+str(len(list2))+' '+str(len(list3))+' '+str(len(list4)))
-#	#print(str(len(list))+' '+str(len(list1))+' '+str(len(list3))+' '+str(len(list4)))
-#	return list4
+def SortListByDate(list,min_boarder, max_boarder):
+    end_list=[]
+    for i in list:
+        delta_day=(datetime.today()-i['date']).days
+        if delta_day>=min_boarder and delta_day<=max_boarder:
+            end_list.append(i)
+    return end_list
+
+
 
 def SortList(list,list_dict_param):
     list_for_log =[]
     list_for_log.append(len(list))
     for i in list_dict_param:
         list1=[]
-        list1 = SortListByParam(list,i['param'],i['min'],i['max'])
+        if i['param']=='date':
+            list1 = SortListByDate(list,i['min'],i['max'])
+        else:
+            list1 = SortListByParam(list,i['param'],i['min'],i['max'])
         list_for_log.append(len(list1))
         list=list1
-
-    
+    print('Сортировка по каждому из параметров')
+    print('площадь, этажность, цена, цена за м2, этаж, дата')
     for i in list_for_log:
         print(str(i),end=' ')
-    
-    
+    print('')
+
     return list
 
 
@@ -173,11 +177,12 @@ def import_Google_Sheet_all_data(list):
                        i['title'],
                        i['price'],
                        i['price_m2'],
-                       str(i['area']),
+                       str(i['area']).replace('.',','),
                        i['year'],
                        i['found_addres'],
                        i['address'],
                        i['urlad'],
+                       str(i['floor_number']),
                        str(i['floors'])
                        
 
@@ -187,7 +192,7 @@ def import_Google_Sheet_all_data(list):
             all_data.append(row_list)
         gs = GoogleSheets.myGoogleSheet()
         #gs.AppendRow('????1!A1',all_data)
-        gs.AddData('Смотреть тут!A1',all_data)
+        gs.AddData('Смотреть тут!A2',all_data)
     else:
         print('Итоговый список пуст')
 

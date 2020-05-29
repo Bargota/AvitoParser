@@ -26,7 +26,11 @@ class AvitoParser(BaseParser.Parser):
         self.TestOrNot(TEST)
         print ('avito')
         count=1
-        for i in range(self.begin_page,self.total_pages+1):	            
+        for i in range(self.begin_page,self.total_pages+1):
+            #if i==20:
+            #    a=4
+            #else:
+            #    break
             html = GetHTMLText(self.url+'&p='+str(i))
             soup = BeautifulSoup(html,'lxml')
 
@@ -40,10 +44,10 @@ class AvitoParser(BaseParser.Parser):
                 address = self._FindAddress(j)
                 area  = self._FindArea(title)
                 price_m2=self._FindPriceM2(price,area)
-                floors = self._FindFloors(title)
+                floor_number,floors = self._FindFloors(title)
                 date = self._FindDate(j)
                 year,found_addres = self._FindYear(address)
-                delta_day=(datetime.today()-date).days
+                #delta_day=(datetime.today()-date).days
                 #if delta_day>=2:
                 #    return self.list
                 
@@ -55,6 +59,7 @@ class AvitoParser(BaseParser.Parser):
                         'address':address,
                         'urlad':url_ad,
                         'area':area,
+                        'floor_number':floor_number,
                         'floors':floors,
                         'year':year,
                         'found_addres':found_addres,
@@ -98,18 +103,8 @@ class AvitoParser(BaseParser.Parser):
             #address = soup.find('div',class_='description').find('p',class_='address').text.strip()
             date0 = soup.find('div',class_='description').find('div',class_='data')
             date_str=date0.find('div',class_='snippet-date-info').text.strip()
-            num1= date_str.find('час')
-            num2= date_str.find('мин')
-            if num1>0 or num2>0:
-                date=datetime.today()
-                #date=date.strftime("%d.%m.%Y")
-            else:
-                #d = datetime.today() - timedelta(days=days_to_subtract)
-                num3 = re.findall(r'(\d{1,2}) д',date_str)
-                if not(len(num3)==0):
-                    date = datetime.today() - timedelta(days=int(num3[0]))
-                else:
-                    date = datetime.strptime("1/1/20 00:00", "%d/%m/%y %H:%M")
+
+            date=self._ParseDate(date_str)            
         except:
             date=datetime.strptime("1/1/19 00:00", "%d/%m/%y %H:%M") 
         return date

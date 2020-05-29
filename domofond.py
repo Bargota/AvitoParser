@@ -42,7 +42,7 @@ class DomofondParser(BaseParser.Parser):
                 address = self._FindAddress(item)
                 area  = self._FindArea(title)
                 price_m2=self._FindPriceM2(price,area)                
-                floors = self._FindFloors(title)
+                floor_number,floors = self._FindFloors(title)
                 date = self._FindDate(item)
                 year,found_addres = self._FindYear(address)
 
@@ -52,6 +52,7 @@ class DomofondParser(BaseParser.Parser):
                             'address':address,
                             'urlad':url_ad,
                             'area':area,
+                            'floor_number':floor_number,
                             'floors':floors,
                             'year':year,
                             'found_addres':found_addres,
@@ -77,20 +78,10 @@ class DomofondParser(BaseParser.Parser):
         
         try:
             #address = soup.find('div',class_='description').find('p',class_='address').text.strip()
-            date0 = soup.find('div',class_='long-item-card__information___YXOtb').find('div',class_='long-item-card__informationFooterRight___3Xw4i').text
-            date_str=date0.find('div',class_='snippet-date-info').text.strip()
-            num1= date_str.find('час')
-            num2= date_str.find('мин')
-            if num1>0 or num2>0:
-                date=datetime.today()
-                #date=date.strftime("%d.%m.%Y")
-            else:
-                #d = datetime.today() - timedelta(days=days_to_subtract)
-                num3 = re.findall(r'(\d{1,2}) д',date_str)
-                if not(len(num3)==0):
-                    date = datetime.today() - timedelta(days=int(num3[0]))
-                else:
-                    date = datetime.strptime("1/1/20 00:00", "%d/%m/%y %H:%M")
+            date_str = soup.find('div',class_='long-item-card__information___YXOtb').find('div',class_='long-item-card__informationFooterRight___3Xw4i').text
+            #date_str=date0.find('div',class_='snippet-date-info').text.strip()
+
+            date=self._ParseDate(date_str)
         except:
             date=datetime.strptime("1/1/19 00:00", "%d/%m/%y %H:%M") 
         return date      

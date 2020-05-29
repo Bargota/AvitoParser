@@ -15,13 +15,13 @@ TEST_ALL_PAGE=0
 
 
 start_time = time.time()
-#TEST=TEST_ONLY_TWO_PAGE
-TEST=TEST_ALL_PAGE
+TEST=TEST_ONLY_TWO_PAGE
+#TEST=TEST_ALL_PAGE
 
 
 my_set = Settings()
 if TEST==TEST_ALL_PAGE:    
-    my_set,good_read_flag = WorkLists.ReadSettingsAll('Настройки!B2:D5','Настройки!G2:G','Настройки!H2:H','Настройки!K2:K4')
+    my_set,good_read_flag = WorkLists.ReadSettingsAll('Настройки!B2:D7','Настройки!G2:G','Настройки!H2:H','Настройки!K2:K4')
 else:
     #list=['https://www.avito.ru/kazan/kvartiry/prodam-ASgBAgICAUSSA8YQ?pmax=2000000&pmin=1000000']
     my_set.url_avito='https://www.avito.ru/kazan/kvartiry/prodam-ASgBAgICAUSSA8YQ?pmax=2000000&pmin=1000000'
@@ -33,16 +33,16 @@ if good_read_flag:
    
 
     list_d=[]
-    try:
-        #my_d=domofond.domofondparser('https://www.domofond.ru/prodazha-nedvizhimosti/search?metroids=289%2c292%2c293%2c290%2c291&propertytypedescription=kvartiry&pricefrom=2000000&priceto=3200000&rooms=one%2ctwo&sortorder=pricepersquaremeterlow&distancefrommetro=upto3000m')
-        my_d=domofond.DomofondParser(my_set.url_domofond)
-        list_d = my_d.GetData(TEST)
-        print("--- %s seconds ---" % (time.time() - start_time))
-    except:
-        print('error: Domofond not parce')
+    #try:
+    #    #my_d=domofond.domofondparser('https://www.domofond.ru/prodazha-nedvizhimosti/search?metroids=289%2c292%2c293%2c290%2c291&propertytypedescription=kvartiry&pricefrom=2000000&priceto=3200000&rooms=one%2ctwo&sortorder=pricepersquaremeterlow&distancefrommetro=upto3000m')
+    #    my_d=domofond.DomofondParser(my_set.url_domofond)
+    #    list_d = my_d.GetData(TEST)
+    #    print("--- %s seconds ---" % (time.time() - start_time))
+    #except:
+    #    print('error: Domofond not parce')
     list_a=[]
     try:
-        my_a=avito.AvitoParser('https://www.avito.ru/kazan/kvartiry/prodam?f=549_5695-5696-5697.59_13987b0&p=1&pmax=2000000&pmin=1000000')
+        #my_a=avito.AvitoParser('https://www.avito.ru/kazan/kvartiry/prodam-ASgBAgICAUSSA8YQ?pmax=2100000&pmin=1500000&p=20')
         my_a=avito.AvitoParser(my_set.url_avito)
         list_a=my_a.GetData(TEST)
         print("--- %s seconds ---" % (time.time() - start_time))
@@ -58,7 +58,7 @@ if good_read_flag:
     #except:
     #    print('Error: Cian not parce')
 
-    union_list = list_d+list_c+list_a
+    union_list = list_d+list_c+list_a    
     union_list=my_d._SortRepeat(union_list)
 
 
