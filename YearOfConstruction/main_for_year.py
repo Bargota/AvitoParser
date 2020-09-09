@@ -3,11 +3,13 @@
 
 import re
 import sys
+
+
 sys.path.insert(0, 'C:\\v.orlov\\Programm\\python\\AvitoParser')
 sys.path.insert(0, 'C:\\v.orlov\\Programm\\python\\AvitoParser\\YearOfConstruction')
-
-import GoogleSheets
 from GoogleSheets import myGoogleSheet
+
+
 
 class FoundYearFromAddres:
     def __init__(self):

@@ -1,5 +1,6 @@
 import httplib2
-import apiclient.discovery
+# import apiclient.discovery
+from googleapiclient import discovery
 from oauth2client.service_account import ServiceAccountCredentials
 
 
@@ -12,8 +13,8 @@ class myGoogleSheet():
 		credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE, ['https://www.googleapis.com/auth/spreadsheets',
 																				  'https://www.googleapis.com/auth/drive'])
 		httpAuth = credentials.authorize(httplib2.Http())
-		self.service = apiclient.discovery.build('sheets', 'v4', http = httpAuth)
-
+		# self.service = apiclient.discovery.build('sheets', 'v4', http = httpAuth)
+		self.service = discovery.build('sheets', 'v4', http = httpAuth)
 
 	#Создание нового документа
 	def CreateSheet(self,name_doc,name_sheet):

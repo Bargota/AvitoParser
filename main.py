@@ -69,7 +69,7 @@ if good_read_flag:
     #sort_list=WorkLists.SortList(sort_list,my_set.list_dict_param)
 
     sort_list = WorkLists.SortListByAddress(union_list,my_set.bad_streets,my_set.good_streets)
-    print('Сортировка по адресу. Количество до\после')
+    print('Сортировка по адресу. Количество до/после')
     print(str(len(union_list))+'/'+str(len(sort_list)))
     sort_list=WorkLists.SortList(sort_list,my_set.list_dict_param)
 

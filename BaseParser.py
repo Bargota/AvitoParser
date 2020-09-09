@@ -7,6 +7,7 @@ sys.path.insert(0, 'D:\\v.orlov\\Programm\\python\\2\\AvitoParser\\YearOfConstru
 path_file_streets='D:\\v.orlov\\Programm\\python\\2\\AvitoParser\\YearOfConstruction\\'
 name_file_streets='streets_list.txt'
 from main_for_year import FoundYearFromAddres
+
 from GoogleSheets import myGoogleSheet
 from datetime import datetime, date, time,timedelta
 
@@ -51,7 +52,7 @@ class Parser():
     def _FindArea(self,title_str):
         if title_str!="":
 
-            area = re.findall(r'( \d{2}[.,]?\d?) м²',title_str)
+            area = re.findall(r'( \d{1,3}[.,]?\d?) м²',title_str)
             float_area  = float(area[0])
             return float_area
         return 0
